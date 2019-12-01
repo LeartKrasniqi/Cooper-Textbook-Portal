@@ -5,7 +5,7 @@ const Suggested_Links = db.define('suggested_links', {
   course_id: 
   {
     type: Sequelize.STRING,
-    validate: {len: [6, 7]}
+    validate: {len: [6, 7]},
     primaryKey: true     
   },
 

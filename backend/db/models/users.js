@@ -26,7 +26,7 @@ const Users = db.define('users', {
   {
     type: Sequelize.STRING,
     get() { return () => this.getDataValue('password') }
-  }
+  },
 
   /* Type of user: 0 = Student, 1 = Teacher, 2 = Admin */
   type:
@@ -38,7 +38,7 @@ const Users = db.define('users', {
       max: 2
     },
     allowNull: false
-  }
+  },
 
   /* Determine if teacher is approved (should be kept true for all other users) */
   is_approved:
@@ -52,7 +52,7 @@ const Users = db.define('users', {
 /* Methods for PW generation */
 Users.prototype.correctPassword = function(candidatePwd) 
 {
-  return User.encryptPassword(candidatePwd, this.salt()) === this.password()
+  return Users.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 
 Users.generateSalt = function() 

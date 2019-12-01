@@ -5,7 +5,7 @@ const Textbooks = db.define('textbooks', {
   textbook_id: 
   {
     type: Sequelize.STRING,
-    validate: {len: 10}
+    validate: {len: 10},
     primaryKey: true     
   },
 
@@ -23,7 +23,7 @@ const Textbooks = db.define('textbooks', {
 
   edition:
   {
-    type: Sequelize.INT,
+    type: Sequelize.INTEGER,
     allowNull: false
   },
 
