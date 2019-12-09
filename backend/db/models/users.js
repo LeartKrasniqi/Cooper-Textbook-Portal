@@ -3,16 +3,15 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Users = db.define('users', {
-  user_id: 
-  {
-    type: Sequelize.STRING,    
-    primaryKey: true     
-  },
-
+  // user_id: 
+  // {
+  //   type: Sequelize.STRING,    
+  //   primaryKey: true     
+  // },
   username:
   {
     type: Sequelize.STRING,
-    allowNull: false
+    primaryKey: true
   },
 
   /* Security */
