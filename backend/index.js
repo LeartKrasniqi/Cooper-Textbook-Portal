@@ -11,6 +11,25 @@ const app = express()
 const PORT = 3000//process.env.PORT
 module.exports = app
 
+// passport registration
+// passport.serializeUser((user, done) => done(null, user.id))
+
+// passport.deserializeUser(async (id, done) => {
+//   try {
+//     const user = await db.models.user.findByPk(id)
+//     done(null, user)
+//   } catch (err) {
+//     done(err)
+//   }
+// })
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
 const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
@@ -33,7 +52,6 @@ const createApp = () => {
   )
   app.use(passport.initialize())
   app.use(passport.session())
-
 
   // auth and api routes
   app.use('/auth', require('./auth'))
