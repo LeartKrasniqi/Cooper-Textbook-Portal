@@ -8,6 +8,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const app = express()
+const cors = require('cors')
 const PORT = 3000//process.env.PORT
 module.exports = app
 
@@ -41,6 +42,9 @@ const createApp = () => {
   // compression middleware
   app.use(compression())
 
+  // cors
+  app.use(cors())
+
   // session middleware with passport
   app.use(
     session({
@@ -56,7 +60,6 @@ const createApp = () => {
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
-  
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
 
