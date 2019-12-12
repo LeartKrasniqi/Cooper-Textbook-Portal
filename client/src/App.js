@@ -25,13 +25,27 @@
 
 // export default App;
 import React, { Component } from "react";
-
+import Routes from './routes'
 class App extends Component
 {
+  // getItems(){
+  //     fetch('http://localhost:3000/api/users/krasniqi@cooper.edu')
+  //     .then(response => response.json()).then(data => console.log(data))
+  //     //.then(items => this.setState({items}))
+  //     .catch(err => console.log(err))   
+  // }
+
+  // componentDidMount() {
+  //   this.getItems()
+
+  // }
   render()
   {
-    return <div> testssss </div>;
+    return (<Routes />)
   }
+  
+
+
 }
 
 export default App;
