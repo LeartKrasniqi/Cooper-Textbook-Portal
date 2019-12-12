@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {Users} = require('../db/models');
 module.exports = router
 
-
+/* Get all users */
 router.get('/', async (req, res, next) => {
   try 
   {
@@ -28,6 +28,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+/* Get user by specific id */
 router.get('/:id', async (req, res, next) => {
   try 
   {

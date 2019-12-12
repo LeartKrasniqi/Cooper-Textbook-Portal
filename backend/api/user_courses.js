@@ -1,15 +1,14 @@
 const router = require('express').Router();
-const {Suggested_Links} = require('../db/models');
+const {User_Courses} = require('../db/models');
 module.exports = router
 
-
-/* Get suggested links for a particular course */
+/* Get all courses associated with a particular user */
 router.get('/:id', async (req, res, next) => {
   try 
   {
-    const links = await Suggested_Links.findAll({
+    const user = await User_Courses.findAll({
       where: {
-        course_id: req.params.id
+        username: req.params.id
       }
     })
     res.json(user)
@@ -18,15 +17,15 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-/* Add a suggested link
-* Need (course_id, user_id, pdf_url)
+/* Add a course for a user 
+* Need (username, course_id)
 */
 router.post('/add_course', async (req, res, next) => {
   try {
-    const link = await Suggested_Links.create(req.body)
+    const user_course = await User_Courses.create(req.body)
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
-      res.status(401).send('You have already suggested a link for that course')
+      res.status(401).send('Course already exists for that user')
     } else {
       next(err)
     }
