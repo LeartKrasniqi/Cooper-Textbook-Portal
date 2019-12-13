@@ -31,3 +31,18 @@ router.post('/', async (req, res, next) => {
     }
   }
 })
+
+/* Delete course_textbook entry */
+router.delete('/delete/:id', (req, res, next) => {
+  try {
+    Course_Textbooks.destroy({
+      where: {
+        course_id: req.params.id
+      }
+    })
+    res.status(200)
+  } catch (error) {
+    res.status(500).send('No associated textbook with that course');
+    console.log("Could not delete course_textbook with id # " + req.params.id)
+  }
+})

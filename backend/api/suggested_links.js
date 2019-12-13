@@ -32,3 +32,19 @@ router.post('/add_course', async (req, res, next) => {
     }
   }
 })
+
+/* Delete suggest_link entry */
+router.delete('/delete', (req, res, next) => {
+  try {
+    Suggested_Links.destroy({
+      where: {
+        course_id: req.body.course_id,
+        user_id: req.body.user_id
+      }
+    })
+    res.status(200)
+  } catch (error) {
+    res.status(500).send('No associated link with that course');
+    console.log("Could not delete suggested_link with id # " + req.body.course_id)
+  }
+})

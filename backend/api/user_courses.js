@@ -31,3 +31,19 @@ router.post('/add_course', async (req, res, next) => {
     }
   }
 })
+
+/* Delete user_course entry */
+router.delete('/delete', (req, res, next) => {
+  try {
+    User_Courses.destroy({
+      where: {
+        user_id: req.body.user_id,
+        course_id: req.body.course_id
+      }
+    })
+    res.status(200)
+  } catch (error) {
+    res.status(500).send('No associated user with that course');
+    console.log("Could not delete user with id # " + req.body.user_id)
+  }
+})
