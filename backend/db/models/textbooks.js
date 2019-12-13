@@ -27,13 +27,6 @@ const Textbooks = db.define('textbooks', {
     allowNull: false
   },
 
-  price:
-  {
-    type: Sequelize.DECIMAL(10, 2),
-    allowNull: false,
-    validate: {isDecimal: true}
-  },
-
   amazon_url:
   {
     type: Sequelize.STRING,
