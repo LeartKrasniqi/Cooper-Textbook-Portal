@@ -45,3 +45,18 @@ router.put("/edit_textbook/:id", async (req, res, next) => {
     next(error)
   }
 })
+
+/* Delete textbook entry */
+router.delete('/delete/:id', (req, res, next) => {
+  try {
+    Textbooks.destroy({
+      where: {
+        textbook_id: req.params.id
+      }
+    })
+    res.status(200)
+  } catch (error) {
+    res.status(500).send('No textbook with that id');
+    console.log("Could not delete textbook with id # " + req.params.id)
+  }
+})
