@@ -1,0 +1,236 @@
+[
+	{
+		"course_id": "CH110A",
+		"course_title": "General Chemistry",
+		"course_professor": "Samuel Wiener"
+	},
+
+	{
+		"course_id": "EID101B",
+		"course_title": "Engineering Design",
+		"course_professor": "George Delagrammatikas"
+	},
+
+	{
+		"course_id": "MA110A",
+		"course_title": "Intro to Linear Algebra",
+		"course_professor": "Michael Kumaresan"
+	},
+
+	{
+		"course_id": "MA113A",
+		"course_title": "Calculus II",
+		"course_professor": "Leonid Vulakh"
+	},
+
+	{
+		"course_id": "ECE150",
+		"course_title": "Digital Logic Design",
+		"course_professor": "Yash Risbud"
+	},
+
+	{
+		"course_id": "ECE160",
+		"course_title": "Programming for Electrical Engineers",
+		"course_professor": "Stuart Kirtman"
+	},
+
+	{
+		"course_id": "MA223A",
+		"course_title": "Vector Calculus",
+		"course_professor": "Ryan Ronan"
+	},
+
+	{
+		"course_id": "PH112L",
+		"course_title": "Physics I: Mechanics",
+		"course_professor": "Alan Wolf"
+	},
+
+	{
+		"course_id": "MA224B",
+		"course_title": "Probability",
+		"course_professor": "Jose Diaz Alban"
+	},
+
+	{
+		"course_id": "ECE240",
+		"course_title": "Circuit Analysis",
+		"course_professor": "Kevin Tien"
+	},
+
+	{
+		"course_id": "MA240A",
+		"course_title": "Differential Equations",
+		"course_professor": "Michael Kumaresan"
+	},
+
+	{
+		"course_id": "MA240B",
+		"course_title": "Differential Equations",
+		"course_professor": "Stan Mintchev"
+	},
+
+	{
+		"course_id": "PH213L",
+		"course_title": "Physics II: Electromagnetics",
+		"course_professor": "Alan Wolf"
+	},
+
+	{
+		"course_id": "ECE211",
+		"course_title": "Signal Processing and Systems",
+		"course_professor": "Fred Fontaine"
+	},
+
+	{
+		"course_id": "ECE241",
+		"course_title": "Electronics I",
+		"course_professor": "Kevin Tien"
+	},
+
+	{
+		"course_id": "ECE251",
+		"course_title": "Computer Architecture",
+		"course_professor": "Stuart Kirtman"
+	},
+
+	{
+		"course_id": "ECE264",
+		"course_title": "Data Structures and Algortihms I",
+		"course_professor": "Carl Sable"
+	},
+
+	{
+		"course_id": "MA352",
+		"course_title": "Discrete Mathematics",
+		"course_professor": "Leonid Vulakh"
+	},
+
+	{
+		"course_id": "ECE300",
+		"course_title": "Communication Theory",
+		"course_professor": "Sam Keene"
+	},
+
+	{
+		"course_id": "ECE310",
+		"course_title": "Digital Signal Processing",
+		"course_professor": "Fred Fontaine"
+	},
+
+	{
+		"course_id": "ECE342",
+		"course_title": "Electronics II",
+		"course_professor": "Neveen Shlayan"
+	},
+
+	{
+		"course_id": "ECE357",
+		"course_title": "Computer Operating Systems",
+		"course_professor": "Jeff Hakner"
+	},
+
+	{
+		"course_id": "ECE365",
+		"course_title": "Data Structures and Algortihms II",
+		"course_professor": "Carl Sable"
+	},
+
+	{
+		"course_id": "ECE393A",
+		"course_title": "JLAB I",
+		"course_professor": "Jeff Sherman"
+	},
+
+	{
+		"course_id": "MA326",
+		"course_title": "Linear Algebra",
+		"course_professor": "SamuelWiener"
+	},
+
+	{
+		"course_id": "ECE302",
+		"course_title": "Stochastic Processes",
+		"course_professor": "Sam Keene"
+	},
+
+	{
+		"course_id": "ECE303",
+		"course_title": "Communication Networks",
+		"course_professor": "Shivam Mevawala"
+	},
+
+	{
+		"course_id": "ECE394",
+		"course_title": "JLAB II",
+		"course_professor": "Neveen Shlayan"
+	},
+
+	{
+		"course_id": "ECE466",
+		"course_title": "Compilers",
+		"course_professor": "Jeff Hakner"
+	},
+
+	{
+		"course_id": "MA347",
+		"course_title": "Modern Algebra",
+		"course_professor": "Om Agrawal"
+	},
+
+	{
+		"course_id": "ECE455",
+		"course_title": "Cybersecurity",
+		"course_professor": "Dan Gitzel"
+	},
+
+	{
+		"course_id": "ECE464",
+		"course_title": "Databases",
+		"course_professor": "Eugene Sokolov"
+	},
+
+	{
+		"course_id": "EID270",
+		"course_title": "Engineering Economy",
+		"course_professor": "Robert Barrett"
+	},
+
+	{
+		"course_id": "HUM243",
+		"course_title": "The Fairy Tale",
+		"course_professor": "Harold Ramdass"
+	},
+
+	{
+		"course_id": "MA350",
+		"course_title": "Math Analysis I",
+		"course_professor": "Om Agrawal"
+	},
+
+	{
+		"course_id": "ME451",
+		"course_title": "Modern Control",
+		"course_professor": "Dirk Luchtenburg, Neveen Shlayan"
+	},
+
+	{
+		"course_id": "ECE332",
+		"course_title": "Electromechanical Energy Conversion",
+		"course_professor": "Jeff Hakner"
+	},
+
+	{
+		"course_id": "ECE467",
+		"course_title": "Natural Language Processing",
+		"course_professor": "Carl Sable"
+	},
+
+	{
+		"course_id": "MA351",
+		"course_title": "Math Analysis II",
+		"course_professor": "Om Agrawal"
+	}
+
+]

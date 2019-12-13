@@ -1,0 +1,121 @@
+[
+	{
+		"textbook_id": "0321587995",
+		"authors": "George Thomas, Maurice Weir, Joel Hass",
+		"title": "Thomas Calculus",
+		"edition": 12,
+		"amazon_url": "https://www.amazon.com/Thomas-Calculus-12th-George-Jr/dp/0321587995/ref=sr_1_4?crid=1DR5Q2G8LRTGR&keywords=thomas+calculus&qid=1576202559&s=books&sprefix=thomas+calc%2Cstripbooks%2C128&sr=1-4"
+	},
+
+	{
+		"textbook_id": "0470458216",
+		"authors": "Howard Anton",
+		"title": "Elementary Linear Algebra",
+		"edition": 10,
+		"amazon_url": "https://www.amazon.com/Elementary-Linear-Algebra-Howard-Anton/dp/0470458216/ref=sr_1_4?crid=EI2B0EC52K8M&keywords=elementary+linear+algebra+anton&qid=1576202744&s=books&sprefix=elementary+linea%2Cstripbooks%2C132&sr=1-4"
+	},
+
+	{
+		"textbook_id": "0131103628",
+		"authors": "Brian Kernighan, Dennis Ritchie",
+		"title": "The C Programming Language",
+		"edition": 2,
+		"amazon_url": "https://www.amazon.com/Programming-Language-2nd-Brian-Kernighan/dp/0131103628/ref=sr_1_1?keywords=K+and+R+C&qid=1576202909&s=books&sr=1-1"
+	},
+
+	{
+		"textbook_id": "0131103628",
+		"authors": "Brian Kernighan, Dennis Ritchie",
+		"title": "The C Programming Language",
+		"edition": 2,
+		"amazon_url": "https://www.amazon.com/Programming-Language-2nd-Brian-Kernighan/dp/0131103628/ref=sr_1_1?keywords=K+and+R+C&qid=1576202909&s=books&sr=1-1"
+	},
+
+	{
+		"textbook_id": "0471758019",
+		"authors": "David Halliday, Robert Resnick, Jearl Walker",
+		"title": "Fundamentals of Physics",
+		"edition": 8,
+		"amazon_url": "https://www.amazon.com/Fundamentals-Physics-Extended-David-Halliday/dp/0471758019/ref=sr_1_12?crid=3FSUW1MGN5WE0&keywords=fundamentals+of+physics&qid=1576203040&s=books&sprefix=Fundamentals+of+Physics%2Cstripbooks%2C136&sr=1-12"
+	},
+
+	{
+		"textbook_id": "0073366617",
+		"authors": "William Hayt, Jack Kemmerly, Steven Durbin",
+		"title": "Engineering Circuit Analysis",
+		"edition": 7,
+		"amazon_url": "https://www.amazon.com/Engineering-Circuit-Analysis-William-Hayt/dp/0073366617/ref=sr_1_6?crid=3SXQ7ON2YASZH&keywords=engineering+circuit+analysis+hayt&qid=1576203180&s=books&sprefix=hayt+circuits%2Cstripbooks%2C135&sr=1-6"
+	},
+
+	{
+		"textbook_id": "1111827060",
+		"authors": "Dennis Zill, Warren Wright",
+		"title": "Differential Equations with Boundary Value Problems",
+		"edition": 8,
+		"amazon_url": "https://www.amazon.com/Differential-Equations-Boundary-Value-Problems-8th/dp/1111827060/ref=sr_1_5?keywords=differential+equations+and+boundary+value+problems+zill&qid=1576203304&s=books&sr=1-5"
+	},
+
+	{
+		"textbook_id": "FONTAINETB",
+		"authors": "Fred Fontaine",
+		"title": "Signals and Systems: A Unified Approach",
+		"edition": 1,
+		"amazon_url": "https://ee.cooper.edu"
+	},
+
+	{
+		"textbook_id": "8120350006",
+		"authors": "Ben Streetman, Sanjay Banerjee",
+		"title": "Solid State Electronics Devices",
+		"edition": 7,
+		"amazon_url": "https://www.amazon.com/Solid-State-Electronic-Devices-Streetman/dp/8120350006/ref=sr_1_3?keywords=solid+state+devices&qid=1576203560&s=books&sr=1-3"
+	},
+
+	{
+		"textbook_id": "0124077269",
+		"authors": "Ben Streetman, Sanjay Banerjee",
+		"title": "Computer Organization and Design",
+		"edition": 5,
+		"amazon_url": "https://www.amazon.com/Computer-Organization-Design-MIPS-Architecture/dp/0124077269/ref=sr_1_1?crid=2SAO696NPDTS1&keywords=computer+organization+and+design&qid=1576203720&s=books&sprefix=computer+org%2Cstripbooks%2C138&sr=1-1"
+	},
+
+	{
+		"textbook_id": "032144146X",
+		"authors": "Mark Weiss",
+		"title": "Data Structurs and Algortihms in C++",
+		"edition": 3,
+		"amazon_url": "https://www.amazon.com/Data-Structures-Algorithm-Analysis-3rd/dp/032144146X/ref=sr_1_3?keywords=data+structures+and+algorithms+in+c%2B%2B+weiss&qid=1576203833&s=books&sr=1-3"
+	},
+
+	{
+		"textbook_id": "032144146X",
+		"authors": "Mark Weiss",
+		"title": "Data Structures and Algortihms in C++",
+		"edition": 3,
+		"amazon_url": "https://www.amazon.com/Data-Structures-Algorithm-Analysis-3rd/dp/032144146X/ref=sr_1_3?keywords=data+structures+and+algorithms+in+c%2B%2B+weiss&qid=1576203833&s=books&sr=1-3"
+	},
+
+	{
+		"textbook_id": "0131593188",
+		"authors": "Richard Johnsonbaugh",
+		"title": "Discrete Mathematics",
+		"edition": 7,
+		"amazon_url": "https://www.amazon.com/Discrete-Mathematics-7th-Richard-Johnsonbaugh/dp/0131593188/ref=sr_1_1?keywords=discrete+mathematics+Johnsonbaugh&qid=1576204186&s=books&sr=1-1"
+	},
+
+	{
+		"textbook_id": "8120326067",
+		"authors": "Stephen Friedberg, Arnold Insel, Lawrence Spence",
+		"title": "Linear Algebra",
+		"edition": 4,
+		"amazon_url": "https://www.amazon.com/Linear-Algebra-Stephen-Friedberg/dp/8120326067/ref=sr_1_4?crid=1R9ZG1GWMOURR&keywords=linear+algebra+friedberg&qid=1576204298&s=books&sprefix=linear+algebra+fr%2Cstripbooks%2C131&sr=1-4"
+	},
+
+	{
+		"textbook_id": "0387220259",
+		"authors": "Serge Lang",
+		"title": "Undergraduate Algebra",
+		"edition": 3,
+		"amazon_url": "https://www.amazon.com/Undergraduate-Algebra-Texts-Mathematics/dp/0387220259/ref=sr_1_2?keywords=algebra+lang&qid=1576204440&s=books&sr=1-2"
+	}
+]
