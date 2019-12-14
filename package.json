@@ -1,0 +1,32 @@
+{
+  "name": "Cooper-Textbook-Portal",
+  "version": "1.0.0",
+  "description": "Final project for ECE464-Databases",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"cd backend && node index.js\" \"cd client && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeartKrasniqi/Cooper-Textbook-Portal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeartKrasniqi/Cooper-Textbook-Portal/issues"
+  },
+  "homepage": "https://github.com/LeartKrasniqi/Cooper-Textbook-Portal#readme",
+  "dependencies": {
+    "concurrently": "^5.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "react-redux": "^7.1.3",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
+  }
+}
