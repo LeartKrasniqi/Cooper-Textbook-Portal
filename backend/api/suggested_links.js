@@ -24,6 +24,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/add_course', async (req, res, next) => {
   try {
     const link = await Suggested_Links.create(req.body)
+    res.status(200).send("Request successful");
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('You have already suggested a link for that course')
@@ -42,7 +43,7 @@ router.delete('/delete', (req, res, next) => {
         user_id: req.body.user_id
       }
     })
-    res.status(200)
+    res.status(200).send("Request successful")
   } catch (error) {
     res.status(500).send('No associated link with that course');
     console.log("Could not delete suggested_link with id # " + req.body.course_id)

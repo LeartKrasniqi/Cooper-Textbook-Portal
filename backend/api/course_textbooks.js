@@ -23,6 +23,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const course_tb = await Course_Textbooks.create(req.body)
+    res.status(200).send("Request successful");
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('Specified textbook already exists for course')
@@ -33,14 +34,15 @@ router.post('/', async (req, res, next) => {
 })
 
 /* Delete course_textbook entry */
-router.delete('/delete/:id', (req, res, next) => {
+router.delete('/delete', (req, res, next) => {
   try {
     Course_Textbooks.destroy({
       where: {
-        course_id: req.params.id
+        course_id: req.body.course_id,
+        textbook_id: req.body.textbook_id
       }
     })
-    res.status(200)
+    res.status(200).send("Request successful")
   } catch (error) {
     res.status(500).send('No associated textbook with that course');
     console.log("Could not delete course_textbook with id # " + req.params.id)

@@ -8,6 +8,10 @@ router.use('/textbooks', require('./textbooks'))
 router.use('/user_courses', require('./user_courses'))
 router.use('/users', require('./users'))
 
+router.use('/admin', require('./admin'))
+router.use('/students', require('./students'))
+router.use('/teachers', require('./teachers'))
+
 router.use((req, res, next) => 
 {
   const error = new Error('Not Found')

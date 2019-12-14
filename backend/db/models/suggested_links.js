@@ -5,11 +5,11 @@ const Suggested_Links = db.define('suggested_links', {
   course_id: 
   {
     type: Sequelize.STRING,
-    validate: {len: [6, 7]},
+    validate: {len: [5, 8]},
     primaryKey: true     
   },
 
-  user_id: 
+  username: 
   {
     type: Sequelize.STRING,
     primaryKey: true     
