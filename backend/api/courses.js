@@ -25,7 +25,7 @@ router.get('/:id', async (req, res, next) => {
         course_id: req.params.id
       }
     })
-    res.json(user)
+    res.json(course)
   } catch (err) {
     next(err);
   }
@@ -35,6 +35,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/add_course', async (req, res, next) => {
   try {
     const course = await Courses.create(req.body)
+    res.status(200).send("Request successful");
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('Course already exists')
@@ -67,7 +68,7 @@ router.delete('/delete/:id', (req, res, next) => {
         course_id: req.params.id
       }
     })
-    res.status(200)
+    res.status(200).send("Request successful")
   } catch (error) {
     res.status(500).send('That course does not exit');
     console.log("Could not delete course with id # " + req.params.id)

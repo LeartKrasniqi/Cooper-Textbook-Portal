@@ -5,7 +5,7 @@ const Courses = db.define('courses', {
   course_id: 
   {
     type: Sequelize.STRING,
-    validate: {len: [5, 7]},
+    validate: {len: [5, 8]},
     primaryKey: true     
   },
 

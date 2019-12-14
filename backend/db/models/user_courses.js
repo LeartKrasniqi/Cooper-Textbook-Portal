@@ -11,7 +11,7 @@ const User_Courses = db.define('user_courses', {
   course_id: 
   {
     type: Sequelize.STRING,
-    validate: {len: [6, 7]},
+    validate: {len: [5, 8]},
     primaryKey: true      
   }
 

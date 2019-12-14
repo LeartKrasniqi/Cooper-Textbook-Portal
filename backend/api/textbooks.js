@@ -12,7 +12,7 @@ router.get('/:id', async (req, res, next) => {
         textbook_id: req.params.id
       }
     })
-    res.json(user)
+    res.json(textbook)
   } catch (err) {
     next(err);
   }
@@ -22,6 +22,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/add_textbook', async (req, res, next) => {
   try {
     const textbook = await Textbooks.create(req.body)
+    res.status(200).send("Request successful");
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('Textbook already exists')
@@ -54,7 +55,7 @@ router.delete('/delete/:id', (req, res, next) => {
         textbook_id: req.params.id
       }
     })
-    res.status(200)
+    res.status(200).send("Request successful")
   } catch (error) {
     res.status(500).send('No textbook with that id');
     console.log("Could not delete textbook with id # " + req.params.id)

@@ -1,6 +1,9 @@
 const router = require('express').Router();
-const {Users} = require('../db/models');
+//const {Users} = require('../db/models');
+const {User_Courses, Course_Textbooks, Courses, Suggested_Links, Textbooks, Users} = require('../db/models');
 module.exports = router
+const Sequelize = require('sequelize');
+const db = require('../db')
 
 /* Get all users */
 router.get('/', async (req, res, next) => {
@@ -32,11 +35,16 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try 
   {
-    const user = await Users.findAll({
-      where: {
-        username: req.params.id
-      }
-    })
+    // const user = await Users.findAll({
+    //   where: {
+    //     username: req.params.id
+    //   },
+    // })
+    const user = await db.query(
+      'SELECT U.username, C.course_id, C.course_title, C.course_professor FROM users U, courses C, user_courses UC WHERE U.username = (:id) AND UC.username = (:id) AND C.course_id = UC.course_id;', {
+        replacements: {id: req.params.id},
+        type: db.QueryTypes.SELECT
+      })
     res.json(user)
   } catch (err) {
     next(err);
