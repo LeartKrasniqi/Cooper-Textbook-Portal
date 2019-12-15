@@ -10,9 +10,10 @@ const db = require('../db')
 router.get('/:id', async (req, res, next) => {
   try 
   {
-    const user = await db.query(
-      'SELECT C.course_id, C.course_title, C.course_professor, T.textbook_id, T.title, T.edition, T.authors, T.amazon_url, T.pdf_url FROM courses C, user_courses UC, textbooks T, course_textbooks CT WHERE UC.username = (:id) AND C.course_id = UC.course_id AND C.course_id = CT.course_id AND CT.textbook_id = T.textbook_id;', {
-        replacements: {id: req.params.id},
+    var Query = "SELECT C.course_id, C.course_title, C.course_professor, T.textbook_id, T.title, T.edition, T.authors, T.amazon_url, T.pdf_url FROM courses as C, user_courses as UC, textbooks as T, course_textbooks as CT WHERE UC.username = \'" + req.params.id + "\' AND C.course_id = UC.course_id AND C.course_id = CT.course_id AND CT.textbook_id = T.textbook_id;"
+    console.log(Query)
+    const user = await db.query(Query, {
+        // replacements: {id: req.params.id},
         type: db.QueryTypes.SELECT
       })
     res.json(user)

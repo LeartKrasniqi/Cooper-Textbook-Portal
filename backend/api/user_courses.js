@@ -9,8 +9,8 @@ router.get('/:id', async (req, res, next) => {
     const user = await User_Courses.findAll({
       where: {
         username: req.params.id
-      }
-      //include: [ {model: Courses, include: [{model: Course_Textbooks, include: [{model: Textbooks}] }]} ]
+      },
+      include: [ {model: Courses, include: [{model: Course_Textbooks, include: [{model: Textbooks}] }]} ]
     })
     res.json(user)
   } catch (err) {

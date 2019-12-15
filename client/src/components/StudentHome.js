@@ -3,7 +3,8 @@ import { me } from '../store'
 import { connect } from 'react-redux'
 import { getUserCourses } from '../store'
 import { addUserCourses } from '../store/students'
-import AddCoursePopUp from './AddCoursePopUp'
+import Table from 'react-bootstrap/Table'
+
 class StudentHome extends Component {
     constructor(props) {
         super(props)
@@ -43,21 +44,21 @@ class StudentHome extends Component {
         }, console.log(this.state))
     }
 
-    componentDidMount() {
+    componentWillMount() {
         // Check that user is indeed a student
         if (this.props.user.type != 0) {
             // go back to login 
             // TODO reroute to prof, admin pages
             this.props.history.push('/')
         }
-        // this.props.getCourses(this.props.user.username)
 
         this.props.getCourses(this.props.user.username)
+
     }
 
 
     render() {
-
+        const courseList = this.props.courses.students
         return (
             <div>
                 <div>
@@ -67,7 +68,40 @@ class StudentHome extends Component {
                 <div>
                     <h3>My Courses</h3>
                     <div>
-                        {console.log(this.props)}
+                        {console.log(typeof(courseList))}
+                        <Table>
+                            <thead>
+                                <tr>
+                                <th>Course ID</th>
+                                <th>Title</th>
+                                <th>Professor</th>
+                                <th>Texbook ID</th>
+                                <th>Texbook Title</th>
+                                <th>Texbook Edition</th>
+                                <th>Texbook Author</th>
+                                <th>Texbook URL</th>
+                                <th>PDF URL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {courseList? (
+     
+                                    Object.keys(courseList).map(course => (
+                                    <tr>
+                                        <td>{courseList[course].course_id}</td>
+                                        <td>{courseList[course].course_title}</td>
+                                        <td>{courseList[course].course_professor}</td>
+                                        <td>{courseList[course].textbook_id}</td>
+                                        <td>{courseList[course].title}</td>
+                                        <td>{courseList[course].edition}</td>
+                                        <td>{courseList[course].authors}</td>
+                                        <td>{courseList[course].amazon_url}</td>
+                                        <td>{courseList[course].pdf_url}</td>
+                                    </tr>
+                                ))):
+                                null}
+                            </tbody>
+                        </Table>
                     </div>
                 </div>
                 <div>
