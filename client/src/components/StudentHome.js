@@ -1,16 +1,27 @@
 import React, {Component} from 'react'
 import {me} from '../store'
 import {connect} from 'react-redux'
-import {userCourses} from '../store'
+import {getUserCourses} from '../store'
+import {addUserCourses} from '../store/students'
 import AddCoursePopUp from './AddCoursePopUp'
 class StudentHome extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            addPopUp: false
+            addPopUp: false,
+            course_id: "",
         }
+        this.togglePopUp = this.togglePopUp.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
+    handleChange(event) {
+        event.preventDefault()
+        this.setState({
+            [event.target.name]: event.target.value
+        }, console.log(this.state))
+    }
+
     togglePopUp() {
         this.setState({
             addPopUp: !this.state.addPopUp
@@ -28,7 +39,11 @@ class StudentHome extends Component {
         this.props.getCourses(this.props.user.username)
     }
 
+    
+
+
     render() {
+        
         return (
             <div>
                 <div>
@@ -37,18 +52,32 @@ class StudentHome extends Component {
                 </div>
                 <div>
                     <h3>My Courses</h3>
-
+                    <div>
+                      
+                    </div>
                 </div>
                 <div>
-                    <button onClick={this.togglePopUp.bind(this)}>Add Course</button>
+                   {!this.state.addPopUp ? <button onClick={this.togglePopUp}>Add Course</button>:  null}
                 </div>
                 <div>
                     {this.state.addPopUp ?
-                        <AddCoursePopUp 
-                            text='CLick close to hid popup'
-                            closePopup={this.togglePopUp.bind(this)}
-                        />
-                    :
+                        // <AddCoursePopUp closePopup={this.togglePopUp.bind(this)} username={this.props.user.username} add={this.props.addCourses}/>
+                        <div>
+                            <form>
+                                <div>
+                                    <a>Course ID: [EX. "ECE464"]</a>
+                                    <input type="text" onChange={this.handleChange}/>
+                                </div>
+                                <button onClick={async () => {
+                                    this.props.add(this.state.course_id, this.props.user.username)
+                                    this.props.togglePopUp()
+                                    }}>
+                                        Add Course to Home
+                                </button>
+                            </form>
+
+                        </div>
+                        :
                         null
                     }
                 </div>
@@ -62,10 +91,14 @@ const mapState = state => {
         courses: state
     }
 }
+
 const mapDispatch = dispatch => {
     return {
         getCourses(username) {
-            dispatch(userCourses(username))
+            dispatch(getUserCourses(username))
+        },
+        addCourses(course_id, username) {
+            dispatch(addUserCourses(course_id, username))
         }
     }
 }

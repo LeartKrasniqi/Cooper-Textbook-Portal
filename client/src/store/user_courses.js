@@ -17,6 +17,7 @@ const user_courses_state = {}
 
 const getUserCourses = courses => ({type: GET_USER_COURSES, courses})
 const addUserCourses = courses => ({type: ADD_USER_COURSES, courses})
+
 /**
  * THUNK CREATORS
  */

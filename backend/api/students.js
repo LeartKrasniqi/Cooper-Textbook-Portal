@@ -43,6 +43,8 @@ router.post('/add_link', async (req, res, next) => {
 */
 router.post('/add_course', async (req, res, next) => {
   try {
+    console.log('/add_course api:')
+    console.log(req.body)
     const user_course = await User_Courses.create(req.body)
     res.status(200).send("Request successful")
     console.log("Added course")
