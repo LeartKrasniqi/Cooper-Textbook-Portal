@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
+import {Router} from 'react-router'
 import {connect} from 'react-redux'
 import {me} from './store'
+import history from './history'
 
 import Landing from './components/Landing'
 import Signup from './components/Signup'
@@ -14,15 +16,16 @@ class Routes extends Component{
 		const {isLoggedIn} = this.props
 		console.log(this.props)
 		return(
-			<Router>
+			<Router history={history}>
 				<Switch>
 					<Route exact path='/' component={Landing} />
-					<Route exact path="/signup" component={Signup} />
-					{isLoggedIn && (
+					<Route exact path='/signup' component={Signup} />
+					<Route exact path='/students' render={() => <StudentHome loginStatus={isLoggedIn} user={this.props.user}/>}/>
+					{/* {isLoggedIn && (
 						<Switch>
-							<Route exact path='/students' render={() => <StudentHome user={this.props.user}/>}/>
+							<Route exact path='/students' render={() => <StudentHome loginStatus={isLoggedIn} user={this.props.user}/>}/>
 						</Switch>
-						)}
+						)} */}
 				</Switch>
 			</Router>
 		)

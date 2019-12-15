@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { me } from '../store'
 import { connect } from 'react-redux'
 import { getUserCourses } from '../store'
-import { addUserCourses } from '../store/students'
+import { addUserCourses, deleteUserCourses } from '../store/students'
 import Table from 'react-bootstrap/Table'
-
+import history from '../history'
 class StudentHome extends Component {
     constructor(props) {
         super(props)
@@ -18,12 +18,15 @@ class StudentHome extends Component {
         this.toggleDeletePopUp = this.toggleDeletePopUp.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
     }
     handleSubmit () {
         this.props.addCourses(this.props.user.username, this.state.course_id)
-        // HMM SEEMS TO BE A PROBLEM WITH THE FUNCTION ABOVE
-        // BACKEND WORKS FINE (IT ADDS COURSES)
-        // BUT USER GETS LOGGED OUT IN THE FRONT END FOR SOME REASON :/
+        this.props.history.push('/students')
+    }
+    handleDelete () {
+        this.props.deleteCourses(this.props.user.username, this.state.course_id)
+        this.props.history.push('/students')
     }
     handleChange(event) {
         event.preventDefault()
@@ -41,19 +44,19 @@ class StudentHome extends Component {
     toggleDeletePopUp() {
         this.setState({
             deletePopUp: !this.state.deletePopUp
-        }, console.log(this.state))
+        })
     }
 
     componentWillMount() {
         // Check that user is indeed a student
-        if (this.props.user.type != 0) {
+        console.log(this.props.loginStatus)
+        if (!this.props.loginStatus || this.props.user.type != 0) {
             // go back to login 
             // TODO reroute to prof, admin pages
-            this.props.history.push('/')
+            history.push('/')
         }
 
         this.props.getCourses(this.props.user.username)
-
     }
 
 
@@ -68,8 +71,9 @@ class StudentHome extends Component {
                 <div>
                     <h3>My Courses</h3>
                     <div>
-                        {console.log(typeof(courseList))}
-                        <Table>
+                        {courseList ? 
+                        (
+                            <Table>
                             <thead>
                                 <tr>
                                 <th>Course ID</th>
@@ -84,8 +88,7 @@ class StudentHome extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {courseList? (
-     
+                                {
                                     Object.keys(courseList).map(course => (
                                     <tr>
                                         <td>{courseList[course].course_id}</td>
@@ -95,13 +98,19 @@ class StudentHome extends Component {
                                         <td>{courseList[course].title}</td>
                                         <td>{courseList[course].edition}</td>
                                         <td>{courseList[course].authors}</td>
-                                        <td>{courseList[course].amazon_url}</td>
-                                        <td>{courseList[course].pdf_url}</td>
+                                        <td href={courseList[course].amazon_url}>{courseList[course].amazon_url}</td>
+                                        <td href={courseList[course].pdf_url}>{courseList[course].pdf_url}</td>
                                     </tr>
-                                ))):
-                                null}
+                                ))}
                             </tbody>
                         </Table>
+                        )
+                        :
+                        <div>
+                            <h5>No courses to list. Please add a Course</h5>
+                        </div>
+                        }
+                        
                     </div>
                 </div>
                 <div>
@@ -109,11 +118,10 @@ class StudentHome extends Component {
                 </div>
                 <div>
                     {this.state.addPopUp ?
-                        // <AddCoursePopUp closePopup={this.togglePopUp.bind(this)} username={this.props.user.username} add={this.props.addCourses}/>
                         <div>
                             <form>
                                 <div>
-                                    <a>Course ID: [EX. "ECE464"]</a>
+                                    <a>Course ID to add: [EX. "ECE464"]</a>
                                     <input type="text" name="course_id" onChange={this.handleChange} />
                                 </div>
                                 <button onClick={async () => {
@@ -130,17 +138,17 @@ class StudentHome extends Component {
                     }
                 </div>
                 <div>
-                    {!this.state.deletePopUp ? <button onClick={this.toggledeletePopUp}>Delete Course</button> : <button onClick={this.toggledeletePopUp}>Close</button>}
+                    {!this.state.deletePopUp ? <button onClick={this.toggleDeletePopUp}>Delete Course</button> : <button onClick={this.toggleDeletePopUp}>Close</button>}
                 </div>
                 <div>
                     {this.state.deletePopUp ?
                         <div>
                             <form>
                                 <div>
-                                    <a>Course ID: [EX. "ECE464"]</a>
+                                    <a>Course ID to Delete: [EX. "ECE464"]</a>
                                     <input type="text" onChange={this.handleChange} />
                                 </div>
-                                <button onClick={this.handleSubmit}>
+                                <button onClick={this.handleDelete}>
                                     Delete Course
                                 </button>
                             </form>
@@ -168,6 +176,9 @@ const mapDispatch = dispatch => {
         },
         addCourses(username, course_id) {
             dispatch(addUserCourses(username, course_id))
+        },
+        deleteCourses(username, course_id) {
+            dispatch(deleteUserCourses(username, course_id))
         }
     }
 }
