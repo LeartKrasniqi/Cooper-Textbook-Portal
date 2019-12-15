@@ -25,7 +25,6 @@ const addLink = courses => ({type: null, courses})
  */
 export const getUserCourses = (username) => async dispatch => {
     let res
-    console.log('hit')
     try {
         res = await axios.get(`http://localhost:3000/api/students/${username}`)
         dispatch(getCourses(res.data))
@@ -56,7 +55,8 @@ export const addUserCourses = (username, course_id) => async dispatch => {
             username,
             course_id
         })
-        console.log('??')
+        // might have to fix this since it breaks the front end
+        // Need to dispatch new state for when the front end students page refreshes and gets new list of courses
         ret = await axios.get(`http://localhost:3000/api/students/${username}`)
         dispatch(addCourses(ret.data))
     } catch (error) {
@@ -71,6 +71,8 @@ export const deleteUserCourses = (username, course_id) => async dispatch => {
             username,
             course_id
         })
+        // might have to fix this since it breaks the front end
+        // Need to dispatch new state for when the front end students page refreshes and gets new list of courses
         ret = await axios.get(`http://localhost:3000/api/students/${username}`)
         dispatch(deleteCourses(ret.data))
     } catch (error) {

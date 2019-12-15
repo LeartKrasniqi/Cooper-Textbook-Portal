@@ -12,9 +12,11 @@ class Routes extends Component{
 	componentDidMount() {
 		this.props.loadInitialData()
 	}
+	// componentWillUpdate() {
+	// 	this.props.loadInitialData()
+	// }
 	render() {
 		const {isLoggedIn} = this.props
-		console.log(this.props)
 		return(
 			<Router history={history}>
 				<Switch>

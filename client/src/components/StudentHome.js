@@ -22,11 +22,12 @@ class StudentHome extends Component {
     }
     handleSubmit () {
         this.props.addCourses(this.props.user.username, this.state.course_id)
-        this.props.history.push('/students')
+        // history.push('/students')
     }
     handleDelete () {
         this.props.deleteCourses(this.props.user.username, this.state.course_id)
-        this.props.history.push('/students')
+        // history.push('/students')
+        // this.forceUpdate()
     }
     handleChange(event) {
         event.preventDefault()
@@ -49,7 +50,7 @@ class StudentHome extends Component {
 
     componentWillMount() {
         // Check that user is indeed a student
-        console.log(this.props.loginStatus)
+        console.log(this.props)
         if (!this.props.loginStatus || this.props.user.type != 0) {
             // go back to login 
             // TODO reroute to prof, admin pages

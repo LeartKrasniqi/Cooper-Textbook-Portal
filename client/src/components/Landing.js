@@ -2,13 +2,14 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {login, me} from '../store'
 import {connect} from 'react-redux'
-
+import history from '../history'
 class Landing extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			email: "",
 			password: "",
+			loggedIn: false
 		}
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -16,6 +17,7 @@ class Landing extends Component {
 
 	componentDidMount() {
 		this.props.loadUser()
+		console.log(this.props.USER)
 	}
 
 	handleChange(event) {
@@ -28,11 +30,12 @@ class Landing extends Component {
 	handleSubmit(event) {
 		event.preventDefault()
 		this.props.logIn(this.state.email, this.state.password)
-		this.props.history.push('/students')
+		// history.push({path:'/students', state: {detail: this.props.USER}}) ughhhhhhhh
+		history.push('/students')
 	}
 
 	redirect() {
-		this.props.history.push('/signup')
+		history.push('/signup')
 	}
 
 	render() {
