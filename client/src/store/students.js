@@ -25,6 +25,7 @@ const addLink = courses => ({type: null, courses})
  */
 export const getUserCourses = (username) => async dispatch => {
     let res
+    console.log('hit')
     try {
         res = await axios.get(`http://localhost:3000/api/students/${username}`)
         dispatch(getCourses(res.data))

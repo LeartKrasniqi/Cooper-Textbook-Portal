@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import {me} from '../store'
-import {connect} from 'react-redux'
-import {getUserCourses} from '../store'
-import {addUserCourses} from '../store/students'
+import React, { Component } from 'react'
+import { me } from '../store'
+import { connect } from 'react-redux'
+import { getUserCourses } from '../store'
+import { addUserCourses } from '../store/students'
 import AddCoursePopUp from './AddCoursePopUp'
 class StudentHome extends Component {
     constructor(props) {
@@ -10,10 +10,19 @@ class StudentHome extends Component {
 
         this.state = {
             addPopUp: false,
+            deletePopUp: false,
             course_id: "",
         }
-        this.togglePopUp = this.togglePopUp.bind(this)
+        this.toggleAddPopUp = this.toggleAddPopUp.bind(this)
+        this.toggleDeletePopUp = this.toggleDeletePopUp.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+    handleSubmit () {
+        this.props.addCourses(this.props.user.username, this.state.course_id)
+        // HMM SEEMS TO BE A PROBLEM WITH THE FUNCTION ABOVE
+        // BACKEND WORKS FINE (IT ADDS COURSES)
+        // BUT USER GETS LOGGED OUT IN THE FRONT END FOR SOME REASON :/
     }
     handleChange(event) {
         event.preventDefault()
@@ -22,28 +31,33 @@ class StudentHome extends Component {
         }, console.log(this.state))
     }
 
-    togglePopUp() {
+    toggleAddPopUp() {
         this.setState({
             addPopUp: !this.state.addPopUp
         })
     }
 
+    toggleDeletePopUp() {
+        this.setState({
+            deletePopUp: !this.state.deletePopUp
+        }, console.log(this.state))
+    }
+
     componentDidMount() {
         // Check that user is indeed a student
-        if(this.props.user.type != 0) {
+        if (this.props.user.type != 0) {
             // go back to login 
             // TODO reroute to prof, admin pages
             this.props.history.push('/')
         }
         // this.props.getCourses(this.props.user.username)
+
         this.props.getCourses(this.props.user.username)
     }
 
-    
-
 
     render() {
-        
+
         return (
             <div>
                 <div>
@@ -53,11 +67,11 @@ class StudentHome extends Component {
                 <div>
                     <h3>My Courses</h3>
                     <div>
-                      
+                        {console.log(this.props)}
                     </div>
                 </div>
                 <div>
-                   {!this.state.addPopUp ? <button onClick={this.togglePopUp}>Add Course</button>:  null}
+                    {!this.state.addPopUp ? <button onClick={this.toggleAddPopUp}>Add Course</button> : <button onClick={this.toggleAddPopUp}>Close</button>}
                 </div>
                 <div>
                     {this.state.addPopUp ?
@@ -66,13 +80,34 @@ class StudentHome extends Component {
                             <form>
                                 <div>
                                     <a>Course ID: [EX. "ECE464"]</a>
-                                    <input type="text" onChange={this.handleChange}/>
+                                    <input type="text" name="course_id" onChange={this.handleChange} />
                                 </div>
                                 <button onClick={async () => {
-                                    this.props.add(this.state.course_id, this.props.user.username)
+                                    this.props.addCourses(this.props.user.username, this.state.course_id)
                                     this.props.togglePopUp()
-                                    }}>
-                                        Add Course to Home
+                                }}>
+                                    Add Course to Home
+                                </button>
+                            </form>
+
+                        </div>
+                        :
+                        null
+                    }
+                </div>
+                <div>
+                    {!this.state.deletePopUp ? <button onClick={this.toggledeletePopUp}>Delete Course</button> : <button onClick={this.toggledeletePopUp}>Close</button>}
+                </div>
+                <div>
+                    {this.state.deletePopUp ?
+                        <div>
+                            <form>
+                                <div>
+                                    <a>Course ID: [EX. "ECE464"]</a>
+                                    <input type="text" onChange={this.handleChange} />
+                                </div>
+                                <button onClick={this.handleSubmit}>
+                                    Delete Course
                                 </button>
                             </form>
 
@@ -86,7 +121,7 @@ class StudentHome extends Component {
     }
 }
 
-const mapState = state => { 
+const mapState = state => {
     return {
         courses: state
     }
@@ -97,8 +132,8 @@ const mapDispatch = dispatch => {
         getCourses(username) {
             dispatch(getUserCourses(username))
         },
-        addCourses(course_id, username) {
-            dispatch(addUserCourses(course_id, username))
+        addCourses(username, course_id) {
+            dispatch(addUserCourses(username, course_id))
         }
     }
 }
