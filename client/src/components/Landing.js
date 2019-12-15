@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import {login} from '../store'
+import {login, me} from '../store'
 import {connect} from 'react-redux'
 
 class Landing extends Component {
@@ -14,6 +14,10 @@ class Landing extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this)
 	}
 
+	componentDidMount() {
+		this.props.loadUser()
+	}
+
 	handleChange(event) {
 		event.preventDefault()
 		this.setState({
@@ -24,6 +28,7 @@ class Landing extends Component {
 	handleSubmit(event) {
 		event.preventDefault()
 		this.props.logIn(this.state.email, this.state.password)
+		this.props.history.push('/students')
 	}
 
 	redirect() {
@@ -37,8 +42,8 @@ class Landing extends Component {
 					<h2>Cooper Union Textbook Portal</h2>
 				</div>
 				<div>
-					{!this.props.user?(
-	<div>Welcome {this.props.user.username}</div>
+					{this.props.user?(
+	<div>Welcome {this.props.user}</div>
 					):(				
 					<div>
 					<div>
@@ -68,7 +73,7 @@ class Landing extends Component {
 
 const mapState = state => {
 	return {
-		user: state.user
+		USER: state
 	}
 }
 
@@ -76,6 +81,9 @@ const mapDispatch = dispatch => {
 	return {
 		logIn(email, password) {
 			dispatch(login(email, password))
+		},
+		loadUser() {
+			dispatch(me())
 		}
 	}
 }

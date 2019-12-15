@@ -5,18 +5,24 @@ import {me} from './store'
 
 import Landing from './components/Landing'
 import Signup from './components/Signup'
+import StudentHome from './components/StudentHome'
 class Routes extends Component{
 	componentDidMount() {
 		this.props.loadInitialData()
 	}
 	render() {
 		const {isLoggedIn} = this.props
-		console.log(isLoggedIn)
+		console.log(this.props)
 		return(
 			<Router>
 				<Switch>
-					<Route exact path='/' component={Landing} user={this.props}/>
+					<Route exact path='/' component={Landing} />
 					<Route exact path="/signup" component={Signup} />
+					{isLoggedIn && (
+						<Switch>
+							<Route exact path='/students' render={() => <StudentHome user={this.props.user}/>}/>
+						</Switch>
+						)}
 				</Switch>
 			</Router>
 		)
@@ -25,7 +31,8 @@ class Routes extends Component{
 
 const mapState = (state) => {
 	return {
-		isLoggedIn: !!state.user.username
+		isLoggedIn: !!state.user.username,
+		user: state.user
 	}
 }
 
