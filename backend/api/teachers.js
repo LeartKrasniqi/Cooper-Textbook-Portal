@@ -42,7 +42,7 @@ router.get('/suggested_links/:id', async (req, res, next) => {
   try 
   {
     const links = await await db.query(
-      'SELECT SL.course_id, SL.username, SL.pdf_url FROM suggested_links SL, users U, user_courses UC WHERE U.username = UC.username AND UC.course_id = SL.course_id;', {
+      'SELECT SL.course_id, SL.username, SL.pdf_url FROM suggested_links SL, users U, user_courses UC WHERE U.username = (:id) AND U.username = UC.username AND UC.course_id = SL.course_id;', {
         replacements: {id: req.params.id},
         type: db.QueryTypes.SELECT
       })
@@ -53,12 +53,12 @@ router.get('/suggested_links/:id', async (req, res, next) => {
 })
 
 /* Remove a suggested_link (either approved --> make edit to tb, or reject --> no furher action) */
-router.delete('/suggested_link/remove', (req, res, next) => {
+router.delete('/suggested_links/remove', (req, res, next) => {
   try {
     Suggested_Links.destroy({
       where: {
         course_id: req.body.course_id,
-        user_id: req.body.user_id
+        username: req.body.username
       }
     })
     res.status(200).send("Request successful")

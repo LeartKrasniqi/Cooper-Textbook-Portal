@@ -24,7 +24,7 @@ router.get('/:id', async (req, res, next) => {
 
 
 /* Add a suggested link
-* Need (course_id, user_id, pdf_url)
+* Need (course_id, username, pdf_url)
 */
 router.post('/add_link', async (req, res, next) => {
   try {

@@ -1,0 +1,56 @@
+[
+	{
+		"username": "tien@cooper.edu",
+		"course_id": "ECE240"
+	},
+
+	{
+		"username": "tien@cooper.edu",
+		"course_id": "ECE241"
+	},
+
+	{
+		"username": "student1@cooper.edu",
+		"course_id": "ECE240"
+	},
+
+	{
+		"username": "student1@cooper.edu",
+		"course_id": "MA326"
+	},
+
+	{
+		"username": "student1@cooper.edu",
+		"course_id": "ECE211"
+	},
+
+	{
+		"username": "student1@cooper.edu",
+		"course_id": "ECE251"
+	},
+
+	{
+		"username": "student1@cooper.edu",
+		"course_id": "MA347"
+	},
+
+	{
+		"username": "student2@cooper.edu",
+		"course_id": "MA347"
+	},
+
+	{
+		"username": "student2@cooper.edu",
+		"course_id": "ECE150"
+	},
+
+	{
+		"username": "student2@cooper.edu",
+		"course_id": "MA110A"
+	},
+
+	{
+		"username": "student2@cooper.edu",
+		"course_id": "PH112"
+	}
+]

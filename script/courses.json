@@ -42,7 +42,7 @@
 	},
 
 	{
-		"course_id": "PH112L",
+		"course_id": "PH112",
 		"course_title": "Physics I: Mechanics",
 		"course_professor": "Alan Wolf"
 	},
@@ -72,7 +72,7 @@
 	},
 
 	{
-		"course_id": "PH213L",
+		"course_id": "PH213",
 		"course_title": "Physics II: Electromagnetics",
 		"course_professor": "Alan Wolf"
 	},

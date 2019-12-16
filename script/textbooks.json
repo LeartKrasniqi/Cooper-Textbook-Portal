@@ -20,15 +20,8 @@
 		"authors": "Brian Kernighan, Dennis Ritchie",
 		"title": "The C Programming Language",
 		"edition": 2,
-		"amazon_url": "https://www.amazon.com/Programming-Language-2nd-Brian-Kernighan/dp/0131103628/ref=sr_1_1?keywords=K+and+R+C&qid=1576202909&s=books&sr=1-1"
-	},
-
-	{
-		"textbook_id": "0131103628",
-		"authors": "Brian Kernighan, Dennis Ritchie",
-		"title": "The C Programming Language",
-		"edition": 2,
-		"amazon_url": "https://www.amazon.com/Programming-Language-2nd-Brian-Kernighan/dp/0131103628/ref=sr_1_1?keywords=K+and+R+C&qid=1576202909&s=books&sr=1-1"
+		"amazon_url": "https://www.amazon.com/Programming-Language-2nd-Brian-Kernighan/dp/0131103628/ref=sr_1_1?keywords=K+and+R+C&qid=1576202909&s=books&sr=1-1",
+		"pdf_url": "https://kremlin.cc/k&r.pdf"
 	},
 
 	{
@@ -73,18 +66,10 @@
 
 	{
 		"textbook_id": "0124077269",
-		"authors": "Ben Streetman, Sanjay Banerjee",
+		"authors": "David Patterson, John Hennessy",
 		"title": "Computer Organization and Design",
 		"edition": 5,
 		"amazon_url": "https://www.amazon.com/Computer-Organization-Design-MIPS-Architecture/dp/0124077269/ref=sr_1_1?crid=2SAO696NPDTS1&keywords=computer+organization+and+design&qid=1576203720&s=books&sprefix=computer+org%2Cstripbooks%2C138&sr=1-1"
-	},
-
-	{
-		"textbook_id": "032144146X",
-		"authors": "Mark Weiss",
-		"title": "Data Structurs and Algortihms in C++",
-		"edition": 3,
-		"amazon_url": "https://www.amazon.com/Data-Structures-Algorithm-Analysis-3rd/dp/032144146X/ref=sr_1_3?keywords=data+structures+and+algorithms+in+c%2B%2B+weiss&qid=1576203833&s=books&sr=1-3"
 	},
 
 	{
@@ -108,7 +93,8 @@
 		"authors": "Stephen Friedberg, Arnold Insel, Lawrence Spence",
 		"title": "Linear Algebra",
 		"edition": 4,
-		"amazon_url": "https://www.amazon.com/Linear-Algebra-Stephen-Friedberg/dp/8120326067/ref=sr_1_4?crid=1R9ZG1GWMOURR&keywords=linear+algebra+friedberg&qid=1576204298&s=books&sprefix=linear+algebra+fr%2Cstripbooks%2C131&sr=1-4"
+		"amazon_url": "https://www.amazon.com/Linear-Algebra-Stephen-Friedberg/dp/8120326067/ref=sr_1_4?crid=1R9ZG1GWMOURR&keywords=linear+algebra+friedberg&qid=1576204298&s=books&sprefix=linear+algebra+fr%2Cstripbooks%2C131&sr=1-4",
+		"pdf_url": "https://ulissesgtz.files.wordpress.com/2019/02/stephen-h.-friedberg-arnold-j.-insel-lawrence-e.-spence-linear-algebra-pearson-2014.pdf"
 	},
 
 	{
