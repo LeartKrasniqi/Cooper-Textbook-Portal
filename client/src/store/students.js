@@ -27,54 +27,53 @@ export const getUserCourses = (username) => async dispatch => {
     let res
     try {
         res = await axios.get(`http://localhost:3000/api/students/${username}`)
-        dispatch(getCourses(res.data))
+        dispatch(getCourses({data: res.data, username: username }))
     } catch (error) {
         console.error(error)
     }
 }
 
-export const addUserLink = (username, course_id, pdf_url) => async dispatch => {
-    let ret
-    try {
-        ret = await axios.post('http://localhost:3000/api/students/add_link', {
-            course_id,
-            username,
-            pdf_url
-        })
-        dispatch(addLink())
-    } catch (error) {
-        console.error(error)
-    }
-}
+// export const addUserLink = (username, course_id, pdf_url) => async dispatch => {
+//     let ret, res
+//     try {
+//         await axios.post('http://localhost:3000/api/students/add_link', {
+//             course_id,
+//             username,
+//             pdf_url
+//         })
+//     } catch (error) {
+//         console.error(error)
+//     }
+// }
 
 
 export const addUserCourses = (username, course_id) => async dispatch => {
     let ret
     try {
-        await axios.post('http://localhost:3000/api/students/add_course',{
+        console.log('add user redux hit')
+        await axios.post('http://localhost:3000/api/students/add_course', {
             username,
             course_id
         })
-        // might have to fix this since it breaks the front end
-        // Need to dispatch new state for when the front end students page refreshes and gets new list of courses
         ret = await axios.get(`http://localhost:3000/api/students/${username}`)
-        dispatch(addCourses(ret.data))
+        dispatch(addCourses({data: ret.data, username: username}))
     } catch (error) {
         console.error(error)
     }
 }
 
 export const deleteUserCourses = (username, course_id) => async dispatch => {
+    console.log('store hit')
+    console.log(username)
+    console.log(course_id)
     let ret
     try {
-        await axios.delete(`http://localhost:3000/api/students/remove_course`,{
+        await axios.delete(`http://localhost:3000/api/students/remove_course`, {data: {
             username,
             course_id
-        })
-        // might have to fix this since it breaks the front end
-        // Need to dispatch new state for when the front end students page refreshes and gets new list of courses
+        }})
         ret = await axios.get(`http://localhost:3000/api/students/${username}`)
-        dispatch(deleteCourses(ret.data))
+        dispatch(deleteCourses({data:ret.data, username: username}))
     } catch (error) {
         console.error(error)
     }
@@ -89,6 +88,8 @@ export default function students(state = studentsState, action) {
         case GET_STUDENT_COURSES:
             return action.courses
         case ADD_STUDENT_COURSES:
+            return action.courses
+        case DELETE_STUDENT_COURSES:
             return action.courses
         default:
             return state

@@ -59,7 +59,9 @@ router.post('/add_course', async (req, res, next) => {
 })
 
 /* Delete user_course entry */
-router.delete('/remove_course', (req, res, next) => {
+router.delete('/remove_course/', async (req, res, next) => {
+  console.log('hit /remove_course')
+  console.log(req.body)
   try {
     User_Courses.destroy({
       where: {
