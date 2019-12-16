@@ -4,14 +4,16 @@ module.exports = router
 
 /* Get all courses associated with a particular user */
 router.get('/:id', async (req, res, next) => {
+  console.log("hit this boy", req.params.id)
   try 
   {
     const user = await User_Courses.findAll({
       where: {
         username: req.params.id
       },
-      include: [ {model: Courses, include: [{model: Course_Textbooks, include: [{model: Textbooks}] }]} ]
+      // include: [ {model: Courses, include: [{model: Course_Textbooks, include: [{model: Textbooks}] }]} ]
     })
+    console.log("here", user)
     res.json(user)
   } catch (err) {
     next(err);

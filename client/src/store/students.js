@@ -27,7 +27,7 @@ export const getUserCourses = (username) => async dispatch => {
     let res
     try {
         res = await axios.get(`http://localhost:3000/api/students/${username}`)
-        dispatch(getCourses(res.data))
+        dispatch(getCourses({data: res.data, username: username }))
     } catch (error) {
         console.error(error)
     }
@@ -51,6 +51,7 @@ export const addUserLink = (username, course_id, pdf_url) => async dispatch => {
 export const addUserCourses = (username, course_id) => async dispatch => {
     let ret
     try {
+        console.log('add user redux hit')
         await axios.post('http://localhost:3000/api/students/add_course',{
             username,
             course_id

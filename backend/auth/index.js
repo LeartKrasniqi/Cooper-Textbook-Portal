@@ -41,3 +41,16 @@ router.post('/logout', (req, res) => {
 router.get('/me', (req, res) => {
   res.json(req.user)
 })
+
+// router.get('/checkauth', (req, res, next) => {
+//   if(req.user){
+//     return next();
+//   }
+//   else {
+//     return res.status(401).json({
+//       error: 'User not authenticated'
+//     })
+//   }
+// }, (req, res) => {
+//   res.status(200).
+// })

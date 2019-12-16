@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { me } from '../store'
 import { connect } from 'react-redux'
-import { getUserCourses } from '../store'
-import { addUserCourses, deleteUserCourses } from '../store/students'
+import { getUserCourses, addUserCourses } from '../store'
+import { deleteUserCourses } from '../store/students'
 import Table from 'react-bootstrap/Table'
 import history from '../history'
+import axios from 'axios'
 class StudentHome extends Component {
     constructor(props) {
         super(props)
@@ -19,13 +20,19 @@ class StudentHome extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
+
     }
-    handleSubmit () {
-        this.props.addCourses(this.props.user.username, this.state.course_id)
-        // history.push('/students')
+    async handleSubmit() {
+
+        this.props.addCourses(this.props.courses.username, this.state.course_id,
+            {
+                username: this.props.courses.username,
+                course_id: this.state.course_id
+            })
+        history.push('/students')
     }
-    handleDelete () {
-        this.props.deleteCourses(this.props.user.username, this.state.course_id)
+    handleDelete() {
+        this.props.deleteCourses(this.props.studentHomeState.user.username, this.state.course_id)
         // history.push('/students')
         // this.forceUpdate()
     }
@@ -49,69 +56,77 @@ class StudentHome extends Component {
     }
 
     componentWillMount() {
-        // Check that user is indeed a student
-        console.log(this.props)
-        if (!this.props.loginStatus || this.props.user.type != 0) {
-            // go back to login 
-            // TODO reroute to prof, admin pages
-            history.push('/')
-        }
-
-        this.props.getCourses(this.props.user.username)
+        this.props.loadUser()
     }
+
+    componentDidMount() {
+        this.props.getCourses(this.props.user.username)
+
+    }
+
+    // componentDidMount() {
+    //     // Check that user is indeed a student
+    //     console.log(this.props)
+    //     if (!this.props.loginStatus || this.props.user.type != 0) {
+    //         // go back to login 
+    //         // TODO reroute to prof, admin pages
+    //         history.push('/')
+    //     }
+    // }
 
 
     render() {
-        const courseList = this.props.courses.students
+        const courseList = this.props.courses.data
+        console.log(courseList)
         return (
             <div>
                 <div>
                     <h2>Cooper Union Textbook Portal</h2>
-                    <h4>Welcome {this.props.user.username}</h4>
+                    {/* <h4>Welcome {this.props.user.username}</h4> */}
                 </div>
                 <div>
                     <h3>My Courses</h3>
                     <div>
-                        {courseList ? 
-                        (
-                            <Table>
-                            <thead>
-                                <tr>
-                                <th>Course ID</th>
-                                <th>Title</th>
-                                <th>Professor</th>
-                                <th>Texbook ID</th>
-                                <th>Texbook Title</th>
-                                <th>Texbook Edition</th>
-                                <th>Texbook Author</th>
-                                <th>Texbook URL</th>
-                                <th>PDF URL</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    Object.keys(courseList).map(course => (
-                                    <tr>
-                                        <td>{courseList[course].course_id}</td>
-                                        <td>{courseList[course].course_title}</td>
-                                        <td>{courseList[course].course_professor}</td>
-                                        <td>{courseList[course].textbook_id}</td>
-                                        <td>{courseList[course].title}</td>
-                                        <td>{courseList[course].edition}</td>
-                                        <td>{courseList[course].authors}</td>
-                                        <td href={courseList[course].amazon_url}>{courseList[course].amazon_url}</td>
-                                        <td href={courseList[course].pdf_url}>{courseList[course].pdf_url}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-                        )
-                        :
-                        <div>
-                            <h5>No courses to list. Please add a Course</h5>
-                        </div>
+                        {courseList ?
+                            (
+                                <Table>
+                                    <thead>
+                                        <tr>
+                                            <th>Course ID</th>
+                                            <th>Title</th>
+                                            <th>Professor</th>
+                                            <th>Texbook ID</th>
+                                            <th>Texbook Title</th>
+                                            <th>Texbook Edition</th>
+                                            <th>Texbook Author</th>
+                                            <th>Texbook URL</th>
+                                            <th>PDF URL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            Object.keys(courseList).map(course => (
+                                                <tr>
+                                                    <td>{courseList[course].course_id}</td>
+                                                    <td>{courseList[course].course_title}</td>
+                                                    <td>{courseList[course].course_professor}</td>
+                                                    <td>{courseList[course].textbook_id}</td>
+                                                    <td>{courseList[course].title}</td>
+                                                    <td>{courseList[course].edition}</td>
+                                                    <td>{courseList[course].authors}</td>
+                                                    <td href={courseList[course].amazon_url}>{courseList[course].amazon_url}</td>
+                                                    <td href={courseList[course].pdf_url}>{courseList[course].pdf_url}</td>
+                                                </tr>
+                                            ))}
+                                    </tbody>
+                                </Table>
+                            )
+                            :
+                            <div>
+                                <h5>No courses to list. Please add a Course</h5>
+                            </div>
                         }
-                        
+
                     </div>
                 </div>
                 <div>
@@ -125,13 +140,10 @@ class StudentHome extends Component {
                                     <a>Course ID to add: [EX. "ECE464"]</a>
                                     <input type="text" name="course_id" onChange={this.handleChange} />
                                 </div>
-                                <button onClick={async () => {
-                                    this.props.addCourses(this.props.user.username, this.state.course_id)
-                                    this.props.togglePopUp()
-                                }}>
-                                    Add Course to Home
-                                </button>
                             </form>
+                            <button onClick={this.handleSubmit}>
+                                    Add Course to Home
+                            </button>
 
                         </div>
                         :
@@ -166,12 +178,17 @@ class StudentHome extends Component {
 
 const mapState = state => {
     return {
-        courses: state
+        courses: state.students,
+        user: state.user,
+        State: state
     }
 }
 
 const mapDispatch = dispatch => {
     return {
+        loadUser() {
+            dispatch(me())
+        },
         getCourses(username) {
             dispatch(getUserCourses(username))
         },
