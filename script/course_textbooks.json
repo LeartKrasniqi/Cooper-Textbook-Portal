@@ -1,0 +1,71 @@
+[
+	{
+		"course_id": "MA113A",
+		"textbook_id": "0321587995"
+	},
+
+	{
+		"course_id": "MA110A",
+		"textbook_id": "0470458216"
+	},
+
+	{
+		"course_id": "ECE160",
+		"textbook_id": "0131103628"
+	},
+
+	{
+		"course_id": "PH112",
+		"textbook_id": "0471758019"
+	},
+
+	{
+		"course_id": "ECE240",
+		"textbook_id": "0073366617"
+	},
+
+	{
+		"course_id": "MA240A",
+		"textbook_id": "1111827060"
+	},
+
+	{
+		"course_id": "PH213",
+		"textbook_id": "0471758019"
+	},
+
+	{
+		"course_id": "ECE211",
+		"textbook_id": "FONTAINETB"
+	},
+
+	{
+		"course_id": "ECE241",
+		"textbook_id": "8120350006"
+	},
+
+	{
+		"course_id": "ECE251",
+		"textbook_id": "0124077269"
+	},
+
+	{
+		"course_id": "ECE264",
+		"textbook_id": "032144146X"
+	},
+
+	{
+		"course_id": "MA352",
+		"textbook_id": "0131593188"
+	},
+
+	{
+		"course_id": "MA326",
+		"textbook_id": "8120326067"
+	},
+
+	{
+		"course_id": "MA347",
+		"textbook_id": "0387220259"
+	}
+]

@@ -8,6 +8,8 @@ import history from './history'
 import Landing from './components/Landing'
 import Signup from './components/Signup'
 import StudentHome from './components/StudentHome'
+import TeacherHome from './components/TeacherHome'
+
 class Routes extends Component{
 
 	render() {
