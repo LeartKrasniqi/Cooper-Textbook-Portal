@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import { getUserCourses, addUserCourses } from '../store'
 import { deleteUserCourses } from '../store/students'
 import Table from 'react-bootstrap/Table'
-import history from '../history'
 import axios from 'axios'
+
+
 class StudentHome extends Component {
     constructor(props) {
         super(props)
@@ -13,34 +14,24 @@ class StudentHome extends Component {
         this.state = {
             addPopUp: false,
             deletePopUp: false,
+            linkPopUp: false,
             course_id: "",
+            pdf_url: "",
         }
+        this.toggleLinkPopUp = this.toggleLinkPopUp.bind(this)
         this.toggleAddPopUp = this.toggleAddPopUp.bind(this)
         this.toggleDeletePopUp = this.toggleDeletePopUp.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
+        this.handleSuggest = this.handleSuggest.bind(this)
+    }
 
-    }
-    async handleSubmit() {
-
-        this.props.addCourses(this.props.courses.username, this.state.course_id,
-            {
-                username: this.props.courses.username,
-                course_id: this.state.course_id
-            })
-        history.push('/students')
-    }
-    handleDelete() {
-        this.props.deleteCourses(this.props.studentHomeState.user.username, this.state.course_id)
-        // history.push('/students')
-        // this.forceUpdate()
-    }
     handleChange(event) {
         event.preventDefault()
         this.setState({
             [event.target.name]: event.target.value
-        }, console.log(this.state))
+        })
     }
 
     toggleAddPopUp() {
@@ -55,18 +46,44 @@ class StudentHome extends Component {
         })
     }
 
+    toggleLinkPopUp() {
+        this.setState({
+            linkPopUp: !this.state.linkPopUp
+        })
+    }
+
+    async handleSuggest() {
+        await axios.post('http://localhost:3000/api/students/add_link', {
+            course_id: this.state.course_id,
+            username: this.props.courses.username,
+            pdf_url: this.state.pdf_url
+        })
+
+        this.toggleLinkPopUp()
+    }
+
+    async handleSubmit() {
+        this.props.addCourses(this.props.courses.username, this.state.course_id)
+        this.toggleAddPopUp()
+    }
+
+    async handleDelete() {
+        this.props.deleteCourses(this.props.courses.username, this.state.course_id)
+        this.toggleDeletePopUp()
+    }
+
     componentWillMount() {
         this.props.loadUser()
     }
 
-    componentDidMount() {
-        this.props.getCourses(this.props.user.username)
+    async componentDidMount() {
+        await this.props.getCourses(this.props.user.username)
 
     }
 
     // componentDidMount() {
     //     // Check that user is indeed a student
-    //     console.log(this.props)
+    //     
     //     if (!this.props.loginStatus || this.props.user.type != 0) {
     //         // go back to login 
     //         // TODO reroute to prof, admin pages
@@ -77,7 +94,6 @@ class StudentHome extends Component {
 
     render() {
         const courseList = this.props.courses.data
-        console.log(courseList)
         return (
             <div>
                 <div>
@@ -142,7 +158,7 @@ class StudentHome extends Component {
                                 </div>
                             </form>
                             <button onClick={this.handleSubmit}>
-                                    Add Course to Home
+                                Add Course to Home
                             </button>
 
                         </div>
@@ -159,17 +175,38 @@ class StudentHome extends Component {
                             <form>
                                 <div>
                                     <a>Course ID to Delete: [EX. "ECE464"]</a>
-                                    <input type="text" onChange={this.handleChange} />
+                                    <input type="text" name="course_id" onChange={this.handleChange} />
                                 </div>
-                                <button onClick={this.handleDelete}>
-                                    Delete Course
-                                </button>
                             </form>
-
+                            <button onClick={this.handleDelete}>
+                                Delete Course
+                            </button>
                         </div>
                         :
                         null
                     }
+                </div>
+                <div>
+                    {courseList ?
+                    <div>
+                        <div>
+                            {!this.state.linkPopUp ? <button onClick={this.toggleLinkPopUp}>Suggest Textbook Link</button> : 
+                            <div>
+                            <div>
+                                <form>
+                                    <div>
+                                        <a>Course ID</a>
+                                        <input type="text" name="course_id" onChange={this.handleChange}/>
+                                        <a>PDF Link</a>
+                                        <input type="text" name="pdf_url" onChange={this.handleChange}/>
+                                    </div>
+                                </form>
+                                <button onClick={this.handleSuggest} >Suggest Link</button>
+                            </div>
+                        </div>}
+                        </div>
+                    </div>
+                : null}
                 </div>
             </div>
         )
