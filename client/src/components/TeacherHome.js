@@ -12,6 +12,8 @@ class TeacherHome extends Component {
         super(props)
 
         this.state = {
+            toggleAdd: false,
+            toggleEdit: false,
             addPopUp: false,
             deletePopUp: false,
             linkPopUp: false,
@@ -26,11 +28,14 @@ class TeacherHome extends Component {
         this.toggleLinkPopUp = this.toggleLinkPopUp.bind(this)
         this.toggleAddPopUp = this.toggleAddPopUp.bind(this)
         this.toggleDeletePopUp = this.toggleDeletePopUp.bind(this)
-        //this.handleChange = this.handleChange.bind(this)
+        this.handleChange = this.handleChange.bind(this)
         //this.handleSubmit = this.handleSubmit.bind(this)
         //this.handleDelete = this.handleDelete.bind(this)
         //this.handleSuggest = this.handleSuggest.bind(this)
         this.handleAdd = this.handleAdd.bind(this)
+        this.toggleAddTextbook = this.toggleAddTextbook.bind(this)
+        this.toggleEditTextbook = this.toggleEditTextbook.bind(this)
+        this.handleEdit = this.handleEdit.bind(this)
     }
 
     handleChange(event) {
@@ -58,27 +63,40 @@ class TeacherHome extends Component {
         })
     }
 
-    // async handleSuggest() {
-    //     await axios.post('http://localhost:3000/api/students/add_link', {
-    //         course_id: this.state.course_id,
-    //         username: this.props.courses.username,
-    //         pdf_url: this.state.pdf_url
-    //     })
+    async 
 
-    //     this.toggleLinkPopUp()
-    // }
-
-    // async handleSubmit() {
-    //     this.props.addCourses(this.props.courses.username, this.state.course_id)
-    //     this.toggleAddPopUp()
-    // }
-
-    // async handleDelete() {
-    //     this.props.deleteCourses(this.props.courses.username, this.state.course_id)
-    //     this.toggleDeletePopUp()
-    // }
     async handleAdd() {
-        this.props.addTextbook(this.props.courses.username, this.props.courses.course_id, this.props.courses.textbook_id, this.props.courses.authors, this.props.courses.title, this.props.courses.edition, this.props.courses.amazon_url, this.props.courses.pdf_url);
+        this.props.addTextbook(
+            this.props.courses.username,
+            this.state.course_id,
+            this.state.textbook_id,
+            this.state.authors,
+            this.state.title,
+            this.state.edition,
+            this.state.amazon_url,
+            this.state.pdf_url);
+    }
+
+    async handleEdit() {
+        this.props.editTextbook(
+            this.props.courses.username,
+            this.state.textbook_id,
+            this.state.edition,
+            this.state.amazon_url,
+            this.state.pdf_url
+        )
+    }
+
+    toggleAddTextbook() {
+        this.setState({
+            toggleAdd: !this.state.toggleAdd
+        })
+    }
+
+    toggleEditTextbook() {
+        this.setState({
+            toggleEdit: !this.state.toggleEdit
+        })
     }
 
     componentWillMount() {
@@ -88,8 +106,6 @@ class TeacherHome extends Component {
     async componentDidMount() {
         await this.props.coursesAndLinks(this.props.user.username)
     }
-
-
 
     render() {
         console.log(this.props)
@@ -112,11 +128,12 @@ class TeacherHome extends Component {
                 <div>
                     <h3>My Courses</h3>
                     <div>
-                        {courseList?
+                        {courseList ?
                             (
                                 <Table>
                                     <thead>
                                         <tr>
+                                            <th>Action</th>
                                             <th>Course ID</th>
                                             <th>Textbook ID</th>
                                             <th>Title</th>
@@ -130,6 +147,9 @@ class TeacherHome extends Component {
                                         {
                                             Object.keys(courseList).map(course => (
                                                 <tr>
+                                                    <td><button onClick={async () => {
+                                                        this.props.deleteTextbook(this.props.courses.username, courseList[course].course_id, courseList[course].textbook_id)
+                                                    }}>Remove</button></td>
                                                     <td>{courseList[course].course_id}</td>
                                                     <td>{courseList[course].textbook_id}</td>
                                                     <td>{courseList[course].title}</td>
@@ -153,7 +173,7 @@ class TeacherHome extends Component {
                 <div>
                     <h3>Pending Links</h3>
                     <div>
-                        {linkList?
+                        {linkList ?
                             (
                                 <Table>
                                     <thead>
@@ -180,45 +200,84 @@ class TeacherHome extends Component {
                                 <h5>No pending links</h5>
                             </div>
                         }
-
                     </div>
                 </div>
+
                 <div>
-                    {!this.state.addPopUp ? <button onClick={this.toggleAddPopUp}>Add Textbook</button> : <button onClick={this.toggleAddPopUp}>Close</button>}
-                </div>
-                <div>
-                    {this.state.addPopUp ?
+                    {!this.state.toggleAdd ?
+                        <button onClick={this.toggleAddTextbook}>Add Textbook</button> :
                         <div>
+                            <button onClick={this.toggleAddTextbook}>Close</button>
                             <form>
                                 <div>
-                                    <a>Course ID: </a>
+                                    <a>Course ID [EX: ECE464]</a>
                                     <input type="text" name="course_id" onChange={this.handleChange} />
-                                    <a>Textbook ID: </a>
+                                </div>
+                                <div>
+                                    <a>Textbook ISBN10</a>
                                     <input type="text" name="textbook_id" onChange={this.handleChange} />
-                                    <a>Authors: </a>
-                                    <input type="text" name="authors" onChange={this.handleChange} />
-                                    <a>Title: </a>
+                                </div>
+                                <div>
+                                    <a>Textbook Title </a>
                                     <input type="text" name="title" onChange={this.handleChange} />
-                                    <a>Edition: </a>
+                                </div>
+                                <div>
+                                    <a>Authors</a>
+                                    <input type="text" name="authors" onChange={this.handleChange} />
+                                </div>
+                                <div>
+                                    <a>Edition</a>
                                     <input type="text" name="edition" onChange={this.handleChange} />
-                                    <a>URL: </a>
+                                </div>
+                                <div>
+                                    <a>URL</a>
                                     <input type="text" name="amazon_url" onChange={this.handleChange} />
-                                    <a>PDF: </a>
+                                </div>
+                                <div>
+                                    <a>PDF</a>
                                     <input type="text" name="pdf_url" onChange={this.handleChange} />
                                 </div>
                             </form>
-                            <button onClick={this.handleAdd}>
-                                Add Textbook 
-                            </button>
-
+                            <button onClick={() => {
+                                this.handleAdd()
+                                this.toggleAddTextbook()
+                            }}>Add Textbook</button>
                         </div>
-                        :
-                        null
                     }
                 </div>
 
-                
-            </div>
+                <div>
+                    {!this.state.toggleEdit ?
+                        <button onClick={this.toggleEditTextbook}>Edit Textbook</button> :
+                        <div>
+                            <button onClick={this.toggleEditTextbook}>Close</button>
+                            <form>
+                                <div>
+                                    <a>Textbook ISBN10</a>
+                                    <input type="text" name="textbook_id" onChange={this.handleChange} />
+                                </div>
+                                <div>
+                                    <a>Edition</a>
+                                    <input type="text" name="edition" onChange={this.handleChange} />
+                                </div>
+                                <div>
+                                    <a>URL</a>
+                                    <input type="text" name="amazon_url" onChange={this.handleChange} />
+                                </div>
+                                <div>
+                                    <a>PDF</a>
+                                    <input type="text" name="pdf_url" onChange={this.handleChange} />
+                                </div>
+                            </form>
+                            <button onClick={() => {
+                                this.handleEdit()
+                                this.toggleEditTextbook()
+                            }}>Edit Textbook</button>
+                        </div>
+                    }
+                </div>
+
+</div>                      
         )
     }
 }
@@ -245,8 +304,8 @@ const mapDispatch = dispatch => {
         deleteTextbook(username, course_id, textbook_id) {
             dispatch(deleteTeacherTextbook(username, course_id, textbook_id))
         },
-        editTextbook(username, textbook_id, authors, title, edition, amazon_url, pdf_url) {
-            dispatch(editTeacherTextbook(username, textbook_id, authors, title, edition, amazon_url, pdf_url))
+        editTextbook(username, textbook_id, edition, amazon_url, pdf_url) {
+            dispatch(editTeacherTextbook(username, textbook_id, edition, amazon_url, pdf_url))
         },
         getPendingLinks(username) {
             dispatch(getTeacherPendingLinks(username))
