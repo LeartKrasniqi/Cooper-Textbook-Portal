@@ -63,66 +63,63 @@ class AdminHome extends Component {
     render() {
 
         const professorList = this.props.me.admin
-        const columns = [
-            {
-              title: 'Action',
-              dataIndex: 'name',
-              key: 'name',
-              render: (text, record) => <Button icon={"check-circle"} onClick={async () => {
-                this.props.approve(record.username)
-                                     }}></Button>
-            },
-            {
-              title: 'Professor',
-              dataIndex: 'username',
-              key: 'username',
-            },
-          ];
         
         return (
             <div>
-                 <Button onClick={() => {
+                 <button onClick={() => {
                     logout()
                     alert('Logged out successfuly')
                     history.push('/')
-                }}>Log Out</Button>
+                }}>Log Out</button>
                 <h3>ADMIN PAGE</h3>
                     <div>
                         <h4>Pending Professors</h4>
                     </div>
+                    {professorList.length !== 0 ? 
                     <div>
-                        {professorList.length > 0 ? (
-                        
-                            <Tabel dataSource={professorList} columns={columns}></Tabel>
-                        )
-                        :
-                        <div>
-                                <a>No Professors Pending Approval</a>
-                        </div> 
-                        }
-                    </div>
+                    <Table id="table">
+                        {/* <thead>
+                            <tr>
+                                <th>Professor</th>
+                                <th>Approve</th>
+                            </tr>
+                        </thead> */}
+                        <tbody>
+                        {Object.keys(professorList).map(prof => (
+                            <tr>
+                                {/* {console.log(prof)} */}
+                                <td>{professorList[prof].username}</td>
+                                <td><button onClick={async () => {
+                                    this.props.approve(professorList[prof].username)
+                                }}>Approve</button></td>
+                            </tr>    
+                        ))}
+                        </tbody>
+                    </Table>
+
+                </div>:
                 <div>
-                    {!this.state.toggle ? <Button onClick={this.toggleAddCourse}>Add Course</Button> : <Button onClick={this.toggleAddCourse}>Close</Button>}
-                </div>
+                    <a>No Professors Pending Approval</a>
+                </div>}    
                 <div>
                     {!this.state.toggle ?
-                    <></>:
+                    <button onClick={this.toggleAddCourse}>Add Course</button>:
                         <div>
-                            <Form>
+                            <form>
                                 <div>
-                                    {/* <a>Course ID [EX: ECE464]</a> */}
-                                    <input type="text" name="course_id" placeholder="Course ID [EX: ECE464]" onChange={this.handleChange}/>
+                                    <a>Course ID [EX: ECE464]</a>
+                                    <input type="text" name="course_id" onChange={this.handleChange}/>
                                 </div>
                                 <div>
-                                    {/* <a>Course Title [EX: Databases]</a> */}
-                                    <input type="text" name="course_title" placeholder="Course Title" onChange={this.handleChange}/>
+                                    <a>Course Title [EX: Databases]</a>
+                                    <input type="text" name="course_title" onChange={this.handleChange}/>
                                 </div>
                                 <div>
-                                    {/* <a>Course Professor [EX: Sokolov]</a> */}
-                                    <input type="text" name="course_professor" placeholder="Course Professor" onChange={this.handleChange}/>
+                                    <a>Course Professor [EX: Sokolov]</a>
+                                    <input type="text" name="course_professor" onChange={this.handleChange}/>
                                 </div>
-                            </Form>
-                            <Button onClick={this.addCourse}>Add Course</Button>
+                            </form>
+                            <button onClick={this.addCourse}>Add Course</button>
                         </div>
                     }   
                 </div>

@@ -7,10 +7,10 @@ import { getTeacherCoursesAndLinks, getTeacherCourses, addTeacherTextbook, delet
 import Table from 'react-bootstrap/Table'
 import './table.css'
 import history from '../history'
-import {Table as Tabel, Button, Form} from 'antd'
+import {Table as Tabel, Button, Layout, Menu} from 'antd'
 import 'antd/dist/antd.css'
 
-
+const { Header, Content, Footer } = Layout;
 
 
 class TeacherHome extends Component {
@@ -145,8 +145,8 @@ class TeacherHome extends Component {
               },
               {
                 title: 'Authors',
-                dataIndex: 'authors',
-                key: 'authors',
+                dataIndex: 'address',
+                key: 'address',
               },
               {
                 title: 'URL',
@@ -288,74 +288,74 @@ class TeacherHome extends Component {
 
                 <div>
                     {!this.state.toggleAdd ?
-                        <Button onClick={this.toggleAddTextbook}>Add Textbook</Button> :
+                        <button onClick={this.toggleAddTextbook}>Add Textbook</button> :
                         <div>
-                            <Button onClick={this.toggleAddTextbook}>Close</Button>
-                            <Form>
+                            <button onClick={this.toggleAddTextbook}>Close</button>
+                            <form>
                                 <div>
-                                    {/* <a>Course ID [EX: ECE464]</a> */}
-                                    <input type="text" name="course_id" placeholder="Course ID [EX: ECE464]" onChange={this.handleChange} />
+                                    <a>Course ID [EX: ECE464]</a>
+                                    <input type="text" name="course_id" onChange={this.handleChange} />
                                 </div>
                                 <div>
-                                    {/* <a>Textbook ISBN10</a> */}
-                                    <input type="text" name="textbook_id" placeholder="Textbook ISBN-10" onChange={this.handleChange} />
+                                    <a>Textbook ISBN10</a>
+                                    <input type="text" name="textbook_id" onChange={this.handleChange} />
                                 </div>
                                 <div>
-                                    {/* <a>Textbook Title </a> */}
-                                    <input type="text" name="title" placeholder="Textbook Title" onChange={this.handleChange} />
+                                    <a>Textbook Title </a>
+                                    <input type="text" name="title" onChange={this.handleChange} />
                                 </div>
                                 <div>
-                                    {/* <a>Authors</a> */}
-                                    <input type="text" name="authors" placeholder="Authors" onChange={this.handleChange} />
+                                    <a>Authors</a>
+                                    <input type="text" name="authors" onChange={this.handleChange} />
                                 </div>
                                 <div>
-                                    {/* <a>Edition</a> */}
-                                    <input type="text" name="edition" placeholder="Edition" onChange={this.handleChange} />
+                                    <a>Edition</a>
+                                    <input type="text" name="edition" onChange={this.handleChange} />
                                 </div>
                                 <div>
-                                    {/* <a>URL</a> */}
-                                    <input type="text" name="amazon_url" placeholder="http://url.com" onChange={this.handleChange} />
+                                    <a>URL</a>
+                                    <input type="text" name="amazon_url" onChange={this.handleChange} />
                                 </div>
                                 <div>
-                                    {/* <a>PDF</a> */}
-                                    <input type="text" name="pdf_url" placeholder="http://pdf.url" onChange={this.handleChange} />
+                                    <a>PDF</a>
+                                    <input type="text" name="pdf_url" onChange={this.handleChange} />
                                 </div>
-                            </Form>
-                            <Button onClick={() => {
+                            </form>
+                            <button onClick={() => {
                                 this.handleAdd()
                                 this.toggleAddTextbook()
-                            }}>Add Textbook</Button>
+                            }}>Add Textbook</button>
                         </div>
                     }
                 </div>
 
                 <div>
                     {!this.state.toggleEdit ?
-                        <Button onClick={this.toggleEditTextbook}>Edit Textbook</Button> :
+                        <button onClick={this.toggleEditTextbook}>Edit Textbook</button> :
                         <div>
-                            <Button onClick={this.toggleEditTextbook}>Close</Button>
+                            <button onClick={this.toggleEditTextbook}>Close</button>
                             <form>
                                 <div>
-                                    {/* <a>Textbook ISBN10</a> */}
-                                    <input type="text" name="textbook_id" placeholder="Textbook ISBN-10" onChange={this.handleChange} />
+                                    <a>Textbook ISBN10</a>
+                                    <input type="text" name="textbook_id" onChange={this.handleChange} />
                                 </div>
                                 <div>
-                                    {/* <a>Edition</a> */}
-                                    <input type="text" name="edition" placeholder="Edition" onChange={this.handleChange} />
+                                    <a>Edition</a>
+                                    <input type="text" name="edition" onChange={this.handleChange} />
                                 </div>
                                 <div>
-                                    {/* <a>URL</a> */}
-                                    <input type="text" name="amazon_url" placeholder="http://url.com" onChange={this.handleChange} />
+                                    <a>URL</a>
+                                    <input type="text" name="amazon_url" onChange={this.handleChange} />
                                 </div>
                                 <div>
-                                    {/* <a>PDF</a> */}
-                                    <input type="text" name="pdf_url" placeholder="http://pdf.com" onChange={this.handleChange} />
+                                    <a>PDF</a>
+                                    <input type="text" name="pdf_url" onChange={this.handleChange} />
                                 </div>
                             </form>
-                            <Button onClick={() => {
+                            <button onClick={() => {
                                 this.handleEdit()
                                 this.toggleEditTextbook()
-                            }}>Edit Textbook</Button>
+                            }}>Edit Textbook</button>
                         </div>
                     }
                 </div>

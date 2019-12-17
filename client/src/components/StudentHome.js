@@ -8,6 +8,9 @@ import Table from 'react-bootstrap/Table'
 import axios from 'axios'
 import './table.css'
 
+import {Table as Tabel, Button, Form} from 'antd'
+import 'antd/dist/antd.css'
+
 class StudentHome extends Component {
     constructor(props) {
         super(props)
@@ -88,15 +91,73 @@ class StudentHome extends Component {
     }
 
     render() {
+        const columns = [
+            {
+              title: 'Action',
+              dataIndex: 'name',
+              key: 'name',
+              render: (text, record) => <Button icon={"delete"} onClick={async () => {
+                this.props.deleteCourses(this.props.courses.username, record.course_id)
+                //alert(`${courseList[course].course_title} successfully deleted.`)
+                                     }}></Button>
+            },
+            {
+              title: 'Course ID',
+              dataIndex: 'course_id',
+              key: 'course_id',
+            },
+            {
+              title: 'Course Title',
+              dataIndex: 'course_title',
+              key: 'course_title',
+            },
+            {
+                title: 'Professor',
+                dataIndex: 'course_professor',
+                key: 'course_professor',
+              },
+              {
+                title: 'Textbook ID',
+                dataIndex: 'textbook_id',
+                key: 'textbook_id',
+              },
+              {
+                title: 'Textbook Title',
+                dataIndex: 'title',
+                key: 'title',
+              },
+              {
+                title: 'Edition',
+                dataIndex: 'edition',
+                key: 'edition',
+              },
+              {
+                title: 'Authors',
+                dataIndex: 'authors',
+                key: 'authors',
+              },
+              {
+                title: 'URL',
+                dataIndex: 'amazon_url',
+                key: 'amazon_url',
+                render: text => <a href={text}>Amazon</a>,
+              },
+              {
+                title: 'PDF',
+                dataIndex: 'pdf_url',
+                key: 'pdf_url',
+                render: text => text ? (<a href={text}>PDF</a>) : null
+              },
+          ];
         const courseList = this.props.courses.data
         return (
             
             <div>
-                 <button onClick={() => {
+                 <Button onClick={() => {
                     logout()
                     alert('Logged out successfuly')
                     history.push('/')
-                }}>Log Out</button>
+                }}>Log Out</Button>
                 <div>
                     <h2>Cooper Union Textbook Portal</h2>
                 </div>
@@ -105,42 +166,43 @@ class StudentHome extends Component {
                     <div>
                         {courseList ?
                             (
-                                <Table id="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Action</th>
-                                            <th>Course ID</th>
-                                            <th>Title</th>
-                                            <th>Professor</th>
-                                            <th>Texbook ID</th>
-                                            <th>Texbook Title</th>
-                                            <th>Texbook Edition</th>
-                                            <th>Texbook Author</th>
-                                            <th>Texbook URL</th>
-                                            <th>PDF URL</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            Object.keys(courseList).map(course => (
-                                                <tr>
-                                                    <td><button onClick={() => {
-                                                        this.props.deleteCourses(this.props.courses.username, courseList[course].course_id)
-                                                        alert(`${courseList[course].course_title} successfully deleted.`)
-                                                    }}>Delete</button></td>
-                                                    <td>{courseList[course].course_id}</td>
-                                                    <td>{courseList[course].course_title}</td>
-                                                    <td>{courseList[course].course_professor}</td>
-                                                    <td>{courseList[course].textbook_id}</td>
-                                                    <td>{courseList[course].title}</td>
-                                                    <td>{courseList[course].edition}</td>
-                                                    <td>{courseList[course].authors}</td>
-                                                    <td href={courseList[course].amazon_url}>{courseList[course].amazon_url}</td>
-                                                    <td href={courseList[course].pdf_url}>{courseList[course].pdf_url}</td>
-                                                </tr>
-                                            ))}
-                                    </tbody>
-                                </Table>
+                                // <Table id="table">
+                                //     <thead>
+                                //         <tr>
+                                //             <th>Action</th>
+                                //             <th>Course ID</th>
+                                //             <th>Title</th>
+                                //             <th>Professor</th>
+                                //             <th>Texbook ID</th>
+                                //             <th>Texbook Title</th>
+                                //             <th>Texbook Edition</th>
+                                //             <th>Texbook Author</th>
+                                //             <th>Texbook URL</th>
+                                //             <th>PDF URL</th>
+                                //         </tr>
+                                //     </thead>
+                                //     <tbody>
+                                //         {
+                                //             Object.keys(courseList).map(course => (
+                                //                 <tr>
+                                //                     <td><button onClick={() => {
+                                //                         this.props.deleteCourses(this.props.courses.username, courseList[course].course_id)
+                                //                         alert(`${courseList[course].course_title} successfully deleted.`)
+                                //                     }}>Delete</button></td>
+                                //                     <td>{courseList[course].course_id}</td>
+                                //                     <td>{courseList[course].course_title}</td>
+                                //                     <td>{courseList[course].course_professor}</td>
+                                //                     <td>{courseList[course].textbook_id}</td>
+                                //                     <td>{courseList[course].title}</td>
+                                //                     <td>{courseList[course].edition}</td>
+                                //                     <td>{courseList[course].authors}</td>
+                                //                     <td href={courseList[course].amazon_url}>{courseList[course].amazon_url}</td>
+                                //                     <td href={courseList[course].pdf_url}>{courseList[course].pdf_url}</td>
+                                //                 </tr>
+                                //             ))}
+                                //     </tbody>
+                                // </Table>
+                                <Tabel dataSource={courseList} columns={columns}></Tabel>
                             )
                             :
                             <div>
@@ -151,23 +213,23 @@ class StudentHome extends Component {
                     </div>
                 </div>
                 <div>
-                    {!this.state.addPopUp ? <button onClick={this.toggleAddPopUp}>Add Course</button> : <button onClick={this.toggleAddPopUp}>Close</button>}
+                    {!this.state.addPopUp ? <Button onClick={this.toggleAddPopUp}>Add Course</Button> : <Button onClick={this.toggleAddPopUp}>Close</Button>}
                 </div>
                 <div>
                     {this.state.addPopUp ?
                         <div>
-                            <form>
+                            <Form>
                                 <div>
-                                    <a>Course ID to add: [EX. "ECE464"]</a>
-                                    <input type="text" name="course_id" onChange={this.handleChange} />
+                                    {/* <a>Course ID to add: [EX. "ECE464"]</a> */}
+                                    <input type="text" name="course_id" placeholder="Course ID [EX: ECE464]" onChange={this.handleChange} />
                                 </div>
-                            </form>
-                            <button onClick={() => {
+                            </Form>
+                            <Button onClick={() => {
                                 this.handleSubmit()
-                                alert('Course Added')
+                                //alert('Course Added')
                                 }}>
                                 Add Course to Home
-                            </button>
+                            </Button>
 
                         </div>
                         :
@@ -198,20 +260,25 @@ class StudentHome extends Component {
                     {courseList ?
                     <div>
                         <div>
-                            {!this.state.linkPopUp ? <button onClick={this.toggleLinkPopUp}>Suggest Textbook Link</button> : 
+                            {!this.state.linkPopUp ? <Button onClick={this.toggleLinkPopUp}>Suggest Textbook Link</Button> : <Button onClick={this.toggleLinkPopUp}>Close</Button>}
+                        </div>
+                        <div>
+                        {this.state.linkPopUp ?
                             <div>
                             <div>
-                                <form>
+                                <Form>
                                     <div>
-                                        <a>Course ID</a>
-                                        <input type="text" name="course_id" onChange={this.handleChange}/>
-                                        <a>PDF Link</a>
-                                        <input type="text" name="pdf_url" onChange={this.handleChange}/>
+                                        {/* <a>Course ID</a> */}
+                                        <input type="text" name="course_id" placeholder="Course ID [EX: ECE464]" onChange={this.handleChange}/>
+                                        {/* <a>PDF Link</a> */}
+                                        <input type="text" name="pdf_url" placeholder="http://pdf.com" onChange={this.handleChange}/>
                                     </div>
-                                </form>
-                                <button onClick={this.handleSuggest}>Suggest Link</button>
+                                </Form>
+                                <Button onClick={this.handleSuggest}>Suggest Link</Button>
                             </div>
-                        </div>}
+                        </div>
+                        : null    
+                    }
                         </div>
                     </div>
                 : null}
