@@ -9,6 +9,7 @@ const DELETE_TEXTBOOK = 'DELETE_TEXTBOOK'
 const EDIT_TEXTBOOK = 'EDIT_TEXTBOOK'
 const GET_PENDING_LINKS = 'GET_PENDING_LINKS'
 const REMOVE_PENDING_LINKS = 'REMOVE_PENDING_LINKS'
+const GET_COURSES_LINKS = 'GET_COURSES_LINKS'
 /**
  * INITIAL STATE
  */
@@ -20,27 +21,38 @@ const teachersState = {}
  */
 
 const getCourses = courses => ({type: GET_TEACHER_COURSES, courses})
-const addTextbook = textbooks => ({type: ADD_TEXTBOOK, textbooks})
-const deleteTextbook = textbooks => ({type: DELETE_TEXTBOOK, textbooks})
-const editTextbook = textbooks => ({type: EDIT_TEXTBOOK, textbooks})
-const getPendingLinks = courses => ({type: GET_PENDING_LINKS, courses})
+const addTextbook = courses => ({type: ADD_TEXTBOOK, courses})
+const deleteTextbook = courses => ({type: DELETE_TEXTBOOK, courses})
+const editTextbook = courses => ({type: EDIT_TEXTBOOK, courses})
+const getPendingLinks = suggested_links => ({type: GET_PENDING_LINKS, suggested_links})
 const removePendingLinks = suggested_links => ({type: REMOVE_PENDING_LINKS, suggested_links})
-
+const coursesAndLinks = data => ({type:GET_COURSES_LINKS, data})
 /**
  * THUNK CREATORS
  */
-export const getTeacherCourses = (username) => async dispatch => {
-    let res
+export const getTeacherCoursesAndLinks = (username) => async dispatch => {
+    let courses, links
     try {
-        res = await axios.get(`http://localhost:3000/api/teachers/${username}`)
-        dispatch(getCourses(res.data))
+        courses = await axios.get(`http://localhost:3000/api/teachers/${username}`)
+        links = await axios.get(`http://localhost:3000/api/teachers/suggested_links/${username}`)
+        dispatch(coursesAndLinks({courses:courses.data, links:links.data, username: username}))
     } catch (error) {
         console.error(error)
     }
 }
 
-export const addTeacherTextbook = (course_id, textbook_id, authors, title, edition, amazon_url, pdf_url) => async dispatch => {
-    let ret
+export const getTeacherCourses = (username) => async dispatch => {
+    let res
+    try {
+        res = await axios.get(`http://localhost:3000/api/teachers/${username}`)
+        dispatch(getCourses({data: res.data, username: username }))
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const addTeacherTextbook = (username, course_id, textbook_id, authors, title, edition, amazon_url, pdf_url) => async dispatch => {
+    let res
     try {
         await axios.post('http://localhost:3000/api/teachers/add_textbook', {
             course_id,
@@ -52,34 +64,38 @@ export const addTeacherTextbook = (course_id, textbook_id, authors, title, editi
             pdf_url
         })
 
-        ret = await axios.post('http://localhost:3000/api/teachers/add_course_textbook', {
+        await axios.post('http://localhost:3000/api/teachers/add_course_textbook', {
             course_id,
             textbook_id,
         })
+
+        res = await axios.get(`http://localhost:3000/api/teachers/${username}`)
         
-        dispatch(addTextbook(ret.data))
+        dispatch(addTextbook({data: res.data, username: username }))
     } catch (error) {
         console.error(error)
     }
 }
 
-export const deleteTeacherTextbook = (course_id, textbook_id) => async dispatch => {
-    let res
+export const deleteTeacherTextbook = (username, course_id, textbook_id) => async dispatch => {
+    let res, ret
     try {
-        res = await axios.delete(`http://localhost:3000/api/teachers/delete_course_textbook`,{
+        res = await axios.delete(`http://localhost:3000/api/teachers/delete_course_textbook`,{data: {
             course_id,
             textbook_id
-        })
-        dispatch(deleteTextbook(res.data))
+        }})
+
+        ret = await axios.get(`http://localhost:3000/api/teachers/${username}`)
+        dispatch(deleteTextbook({data: ret.data, username: username }))
     } catch (error) {
         console.error(error)
     }
 }
 
-export const editTeacherTextbook = (textbook_id, authors, title, edition, amazon_url, pdf_url) => async dispatch => {
+export const editTeacherTextbook = (username, textbook_id, authors, title, edition, amazon_url, pdf_url) => async dispatch => {
     let ret
     try {
-        ret = await axios.put(`http://localhost:3000/api/teachers/edit_textbook/${textbook_id}`, {
+        await axios.put(`http://localhost:3000/api/teachers/edit_textbook/${textbook_id}`, {
             authors,
             title,
             edition,
@@ -87,30 +103,33 @@ export const editTeacherTextbook = (textbook_id, authors, title, edition, amazon
             pdf_url
         })
         
-        dispatch(editTextbook(ret.data))
+        ret = await axios.get(`http://localhost:3000/api/teachers/${username}`)
+        dispatch(editTextbook({data: ret.data, username: username }))
     } catch (error) {
         console.error(error)
     }
 }
 
-export const getTeacherPendingLinks = (course_id) => async dispatch => {
+export const getTeacherPendingLinks = (username) => async dispatch => {
     let res
     try {
-        res = await axios.get(`http://localhost:3000/api/teachers/suggested_links/${course_id}`)
-        dispatch(getPendingLinks(res.data))
+        res = await axios.get(`http://localhost:3000/api/teachers/suggested_links/${username}`)
+        dispatch(getPendingLinks({data: res.data, username: username }))
     } catch (error) {
         console.error(error)
     }
 }
 
-export const removeTeacherPendingLinks = (course_id, username) => async dispatch => {
+export const removeTeacherPendingLinks = (username, course_id) => async dispatch => {
     let res
     try {
-        res = await axios.delete(`http://localhost:3000/api/teachers/suggested_link/remove`,{
+        await axios.delete(`http://localhost:3000/api/teachers/suggested_links/remove`,{ data: {
             course_id,
             username
-        })
-        dispatch(removePendingLinks(res.data))
+        }})
+
+        res = await axios.get(`http://localhost:3000/api/teachers/suggested_links/${username}`)
+        dispatch(removePendingLinks({data: res.data, username: username }))
     } catch (error) {
         console.error(error)
     }
@@ -126,7 +145,17 @@ export default function teachers(state = teachersState, action) {
         case GET_TEACHER_COURSES:
             return action.courses
         case ADD_TEXTBOOK:
-            return action.textbooks
+            return action.courses
+        case DELETE_TEXTBOOK:
+            return action.courses
+        case EDIT_TEXTBOOK:
+            return action.courses
+        case GET_PENDING_LINKS:
+            return action.suggested_links
+        case REMOVE_PENDING_LINKS:
+            return action.suggested_links
+        case GET_COURSES_LINKS:
+            return action.data
         default:
             return state
     }

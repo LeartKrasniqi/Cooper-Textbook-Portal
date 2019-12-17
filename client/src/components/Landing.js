@@ -23,7 +23,8 @@ class Landing extends Component {
 		// check log in
 		console.log('did mount')
 		if (this.props.USER.user.username) {
-			history.push('/students')
+			//history.push('/students')
+			history.push('/teachers')
 		}
 	}
 

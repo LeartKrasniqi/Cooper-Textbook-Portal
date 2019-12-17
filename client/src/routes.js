@@ -18,7 +18,8 @@ class Routes extends Component{
 				<Switch>
 					<Route exact path='/' component={Landing} />
 					<Route exact path='/signup' component={Signup} />
-					<Route exact path='/students' component={StudentHome}/>
+					{/* <Route exact path='/students' component={StudentHome}/> */}
+					<Route exact path='/teachers' component={TeacherHome}/>
 					{/* {isLoggedIn && (
 						<Switch>
 							<Route exact path='/students' render={() => <StudentHome loginStatus={isLoggedIn} user={this.props.user}/>}/>
