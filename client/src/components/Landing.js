@@ -4,6 +4,8 @@ import { login, me } from '../store'
 import { connect } from 'react-redux'
 import history from '../history'
 import './login.css'
+import {Button, Input, Form, Row, Col} from 'antd'
+import 'antd/dist/antd.css'
 class Landing extends Component {
 	constructor(props) {
 		super(props)
@@ -66,10 +68,11 @@ class Landing extends Component {
 		const user = this.props.USER
 		// console.log(user)
 		return (
-			<div>
+			<div style={{width: "100%", heigh:"100%", alignItems: "center"}}>
 				<div>
 					<h2>Cooper Union Textbook Portal</h2>
 				</div>
+				
 				<div>
 					{this.props.user ? (
 						<div>Welcome {this.props.user}</div>
@@ -78,15 +81,15 @@ class Landing extends Component {
 								<div>
 									<h4>Please Log In</h4>
 								</div>
-								<form>
+								<Form>
 									<div>
-										<input type="text" name="email" placeholder="Enter Username" onChange={this.handleChange} />
+										<Input type="text" name="email" placeholder="Enter Username" onChange={this.handleChange} />
 									</div>
 									<div>
-										<input type="password" name="password" placeholder="Enter Password" onChange={this.handleChange} />
+										<Input type="password" name="password" placeholder="Enter Password" onChange={this.handleChange} />
 									</div>
-									<button onClick={this.handleSubmit}>Log In</button>
-								</form>
+									<Button type="primary" style={{marginBottom: "10px"}} onClick={this.handleSubmit}>Log In</Button>
+								</Form>
 								<div>
 									<h5>Don't have an account? <a href="localhost:3001/signup" onClick={this.redirect.bind(this)}>Sign up</a> today!</h5>
 								</div>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {signup} from '../store'
 import {connect} from 'react-redux'
+import {Button, Input, Form, Row, Col} from 'antd'
+import 'antd/dist/antd.css'
 class Signup extends Component {
     constructor() {
         super()
@@ -54,29 +56,31 @@ class Signup extends Component {
         return (
             <div>
                 <h3>Sign Up for the Cooper Union Textbook Portal!</h3>
-                <form>
+                <Form>
                     <div>
-                        <input type="text" name="email" placeholder="Enter Username" onChange={this.handleChange} />
+                        <Input type="text" name="email" placeholder="Enter Username" onChange={this.handleChange} />
                     </div>
                     <div>
-                        <input type="password" name="password" id="pw" placeholder="Enter Password" onChange={this.handleChange}/>
-                        <input type="checkbox" onClick={this.togglePassword} />
+                        <Input type="password" name="password" id="pw" placeholder="Enter Password" onChange={this.handleChange}/>
+                        </div>
+                        <div>
+                        <Input type="checkbox" onClick={this.togglePassword} />
                         Show Password
                     </div>
                     <div>
                         <h5>Are you a ...</h5>
                         <label> Student
-                            <input type="radio" value="0" checked={this.state.type == 0} onChange={this.handleRadio}/>
+                            <Input type="radio" value="0" checked={this.state.type == 0} onChange={this.handleRadio}/>
                         </label>
                         <label> Professor
-                            <input type="radio" value="1" checked={this.state.type == 1} onChange={this.handleRadio}/>
+                            <Input type="radio" value="1" checked={this.state.type == 1} onChange={this.handleRadio}/>
                         </label>
                         {/* <label> Admin
                                 <input type="radio" value="2" checked={this.state.type == 2} onChange={this.handleRadio}/>
                         </label> */}
                     </div>
-                    <button onClick={this.handleSubmit}>Sign Up</button>
-                </form>
+                    <Button onClick={this.handleSubmit}>Sign Up</Button>
+                </Form>
             </div>
         )
     }
