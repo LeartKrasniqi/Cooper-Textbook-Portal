@@ -9,6 +9,7 @@ import Landing from './components/Landing'
 import Signup from './components/Signup'
 import StudentHome from './components/StudentHome'
 import TeacherHome from './components/TeacherHome'
+import AdminHome from './components/AdminHome'
 
 class Routes extends Component{
 
@@ -18,13 +19,9 @@ class Routes extends Component{
 				<Switch>
 					<Route exact path='/' component={Landing} />
 					<Route exact path='/signup' component={Signup} />
-					{/* <Route exact path='/students' component={StudentHome}/> */}
-					<Route exact path='/teachers' component={TeacherHome}/>
-					{/* {isLoggedIn && (
-						<Switch>
-							<Route exact path='/students' render={() => <StudentHome loginStatus={isLoggedIn} user={this.props.user}/>}/>
-						</Switch>
-						)} */}
+					<Route exact path='/students' component={StudentHome}/>
+					<Route exact path='/admin' component={AdminHome} />
+          <Route exact path='/teachers' component={TeacherHome}/>
 				</Switch>
 			</Router>
 		)

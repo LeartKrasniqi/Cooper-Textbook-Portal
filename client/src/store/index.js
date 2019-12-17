@@ -5,7 +5,9 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import students from './students'
 import teachers from './teachers'
-const reducer = combineReducers({user, students, teachers})
+import admin from './admin'
+
+const reducer = combineReducers({user, students, teachers, admin})
 
 const middleware = composeWithDevTools(
     applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -17,3 +19,4 @@ export default store
 export * from './user'
 export * from './students'
 export * from './teachers'
+export * from './admin'
