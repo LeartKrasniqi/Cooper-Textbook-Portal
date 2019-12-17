@@ -6,6 +6,7 @@ import {getPendingProfs, removePendingProf} from '../store/admin'
 import {logout} from '../store/user'
 import axios from 'axios'
 import history from '../history'
+import './table.css'
 
 class AdminHome extends Component {
     constructor(props) {
@@ -73,7 +74,7 @@ class AdminHome extends Component {
                     </div>
                     {professorList.length !== 0 ? 
                     <div>
-                    <Table>
+                    <Table id="table">
                         <thead>
                             <tr>
                                 <th>Professor</th>

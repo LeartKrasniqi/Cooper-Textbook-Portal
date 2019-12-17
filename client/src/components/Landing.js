@@ -25,6 +25,10 @@ class Landing extends Component {
 		// 	history.push('/students')
 		// }
 		const user = this.props.USER.user
+		if(user.error) {
+			alert('Incorrect log-in credentials. Please try again')
+		}
+
 		if(user != null) {
 			switch(user.type) {
 				case 0:
