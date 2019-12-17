@@ -130,7 +130,7 @@ class TeacherHome extends Component {
                     <div>
                         {courseList ?
                             (
-                                <Table>
+                                <Table responsive striped bordered hover>
                                     <thead>
                                         <tr>
                                             <th>Action</th>
