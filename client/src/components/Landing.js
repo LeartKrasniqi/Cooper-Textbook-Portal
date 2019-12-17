@@ -21,9 +21,19 @@ class Landing extends Component {
 
 	componentDidUpdate() {
 		// check log in
-		console.log('did mount')
-		if (this.props.USER.user.username) {
-			history.push('/students')
+		// if (this.props.USER.user.username) {
+		// 	history.push('/students')
+		// }
+		const user = this.props.USER.user
+		if(user != null) {
+			switch(user.type) {
+				case 0:
+					history.push('/students')
+				case 1:
+					history.push('/teachers')
+				case 2:
+					history.push('/admin')
+			}
 		}
 	}
 

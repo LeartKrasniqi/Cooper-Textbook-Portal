@@ -98,7 +98,6 @@ class StudentHome extends Component {
             <div>
                 <div>
                     <h2>Cooper Union Textbook Portal</h2>
-                    {/* <h4>Welcome {this.props.user.username}</h4> */}
                 </div>
                 <div>
                     <h3>My Courses</h3>

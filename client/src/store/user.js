@@ -54,7 +54,6 @@ export const signup = (email, password, type, is_approved) => async dispatch => 
   }
 }
 
-
 export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
