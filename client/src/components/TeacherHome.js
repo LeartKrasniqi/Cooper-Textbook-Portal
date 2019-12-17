@@ -131,6 +131,7 @@ class TeacherHome extends Component {
                         {courseList ?
                             (
                                 <Table id="table">
+
                                     <thead>
                                         <tr>
                                             <th>Action</th>

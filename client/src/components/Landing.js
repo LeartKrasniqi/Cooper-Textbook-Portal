@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { login, me } from '../store'
 import { connect } from 'react-redux'
 import history from '../history'
+import './login.css'
 class Landing extends Component {
 	constructor(props) {
 		super(props)
@@ -79,12 +80,10 @@ class Landing extends Component {
 								</div>
 								<form>
 									<div>
-										<a>Email</a>
-										<input type="text" name="email" onChange={this.handleChange} />
+										<input type="text" name="email" placeholder="Enter Username" onChange={this.handleChange} />
 									</div>
 									<div>
-										<a>Password</a>
-										<input type="password" name="password" onChange={this.handleChange} />
+										<input type="password" name="password" placeholder="Enter Password" onChange={this.handleChange} />
 									</div>
 									<button onClick={this.handleSubmit}>Log In</button>
 								</form>
