@@ -11,7 +11,7 @@ Database: PostgreSQL with Sequelize
 ## To run the app
 ```
 npm install
-node server/seed.js   # If you want to seed the database
+node script/seed.js   # If you want to seed the database
 npm start
 ```
 
