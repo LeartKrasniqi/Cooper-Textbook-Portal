@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import {logout} from '../store/user'
 import { getTeacherCoursesAndLinks, getTeacherCourses, addTeacherTextbook, deleteTeacherTextbook, editTeacherTextbook, getTeacherPendingLinks, removeTeacherPendingLinks } from '../store/teachers'
 import Table from 'react-bootstrap/Table'
-//import { Table } from 'antd'
+import './table.css'
 import history from '../history'
 class TeacherHome extends Component {
     constructor(props) {
@@ -130,7 +130,8 @@ class TeacherHome extends Component {
                     <div>
                         {courseList ?
                             (
-                                <Table responsive striped bordered hover>
+                                <Table id="table">
+
                                     <thead>
                                         <tr>
                                             <th>Action</th>
