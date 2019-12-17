@@ -108,7 +108,7 @@ class TeacherHome extends Component {
     }
 
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         const courseList = this.props.courses.courses
         const linkList = this.props.courses.links
         //const linkList = this.props.suggested_links.data

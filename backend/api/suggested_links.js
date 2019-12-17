@@ -46,6 +46,6 @@ router.delete('/delete', (req, res, next) => {
     res.status(200).send("Request successful")
   } catch (error) {
     res.status(500).send('No associated link with that course');
-    console.log("Could not delete suggested_link with id # " + req.body.course_id)
+    // console.log("Could not delete suggested_link with id # " + req.body.course_id)
   }
 })

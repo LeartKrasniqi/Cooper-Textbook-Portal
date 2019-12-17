@@ -4,7 +4,7 @@ module.exports = router
 
 /* Get all courses associated with a particular user */
 router.get('/:id', async (req, res, next) => {
-  console.log("hit this boy", req.params.id)
+  // console.log("hit this boy", req.params.id)
   try 
   {
     const user = await User_Courses.findAll({
@@ -12,7 +12,7 @@ router.get('/:id', async (req, res, next) => {
         username: req.params.id
       },
     })
-    console.log("here", user)
+    // console.log("here", user)
     res.json(user)
   } catch (err) {
     next(err);
@@ -48,6 +48,6 @@ router.delete('/delete', (req, res, next) => {
     res.status(200).send("Request successful")
   } catch (error) {
     res.status(500).send('No associated user with that course');
-    console.log("Could not delete user with id # " + req.body.user_id)
+    // console.log("Could not delete user with id # " + req.body.user_id)
   }
 })
