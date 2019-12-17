@@ -176,7 +176,7 @@ class TeacherHome extends Component {
                     <div>
                         {linkList ?
                             (
-                                <Table>
+                                <Table id="table">
                                     <thead>
                                         <tr>
                                             <th>Course ID</th>
