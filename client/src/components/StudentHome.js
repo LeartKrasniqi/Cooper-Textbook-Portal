@@ -6,7 +6,7 @@ import { getUserCourses, addUserCourses } from '../store'
 import { deleteUserCourses } from '../store/students'
 import Table from 'react-bootstrap/Table'
 import axios from 'axios'
-
+import './table.css'
 
 class StudentHome extends Component {
     constructor(props) {
@@ -90,6 +90,7 @@ class StudentHome extends Component {
     render() {
         const courseList = this.props.courses.data
         return (
+            
             <div>
                  <button onClick={() => {
                     logout()
@@ -104,7 +105,7 @@ class StudentHome extends Component {
                     <div>
                         {courseList ?
                             (
-                                <Table>
+                                <Table id="table">
                                     <thead>
                                         <tr>
                                             <th>Action</th>
