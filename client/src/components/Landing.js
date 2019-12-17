@@ -29,10 +29,13 @@ class Landing extends Component {
 			switch(user.type) {
 				case 0:
 					history.push('/students')
+					break
 				case 1:
 					history.push('/teachers')
+					break
 				case 2:
 					history.push('/admin')
+					break
 			}
 		}
 	}

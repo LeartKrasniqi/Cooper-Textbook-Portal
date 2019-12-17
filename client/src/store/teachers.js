@@ -52,7 +52,7 @@ export const getTeacherCourses = (username) => async dispatch => {
 }
 
 export const addTeacherTextbook = (username, course_id, textbook_id, authors, title, edition, amazon_url, pdf_url) => async dispatch => {
-    let res
+    let courses, links
     try {
         await axios.post('http://localhost:3000/api/teachers/add_textbook', {
             course_id,
@@ -69,42 +69,45 @@ export const addTeacherTextbook = (username, course_id, textbook_id, authors, ti
             textbook_id,
         })
 
-        res = await axios.get(`http://localhost:3000/api/teachers/${username}`)
+        // res = await axios.get(`http://localhost:3000/api/teachers/${username}`)
         
-        dispatch(addTextbook({data: res.data, username: username }))
+        courses = await axios.get(`http://localhost:3000/api/teachers/${username}`)
+        links = await axios.get(`http://localhost:3000/api/teachers/suggested_links/${username}`)
+        dispatch(addTextbook({courses:courses.data, links:links.data, username: username}))
+
+        // dispatch(addTextbook({data: res.data, username: username }))
     } catch (error) {
         console.error(error)
     }
 }
 
 export const deleteTeacherTextbook = (username, course_id, textbook_id) => async dispatch => {
-    let res, ret
+    let courses, links
     try {
-        res = await axios.delete(`http://localhost:3000/api/teachers/delete_course_textbook`,{data: {
+        await axios.delete(`http://localhost:3000/api/teachers/delete_course_textbook`,{data: {
             course_id,
             textbook_id
         }})
 
-        ret = await axios.get(`http://localhost:3000/api/teachers/${username}`)
-        dispatch(deleteTextbook({data: ret.data, username: username }))
+        courses = await axios.get(`http://localhost:3000/api/teachers/${username}`)
+        links = await axios.get(`http://localhost:3000/api/teachers/suggested_links/${username}`)
+        dispatch(deleteTextbook({courses:courses.data, links:links.data, username: username}))
     } catch (error) {
         console.error(error)
     }
 }
 
-export const editTeacherTextbook = (username, textbook_id, authors, title, edition, amazon_url, pdf_url) => async dispatch => {
-    let ret
+export const editTeacherTextbook = (username, textbook_id, edition, amazon_url, pdf_url) => async dispatch => {
+    let courses 
     try {
         await axios.put(`http://localhost:3000/api/teachers/edit_textbook/${textbook_id}`, {
-            authors,
-            title,
             edition,
             amazon_url,
             pdf_url
         })
         
-        ret = await axios.get(`http://localhost:3000/api/teachers/${username}`)
-        dispatch(editTextbook({data: ret.data, username: username }))
+        courses = await axios.get(`http://localhost:3000/api/teachers/${username}`)
+        dispatch(editTextbook({courses:courses.data, username: username }))
     } catch (error) {
         console.error(error)
     }
