@@ -45,12 +45,10 @@ class Signup extends Component {
                 <h3>Sign Up for the Cooper Union Textbook Portal!</h3>
                 <form>
                     <div>
-                        <a>Email</a>
-                        <input type="text" name="email" onChange={this.handleChange} />
+                        <input type="text" name="email" placeholder="Enter Username" onChange={this.handleChange} />
                     </div>
                     <div>
-                        <a>Password</a>
-                        <input type="text" name="password" onChange={this.handleChange}/>
+                        <input type="text" name="password" placeholder="Enter Password" onChange={this.handleChange}/>
                     </div>
                     <div>
                         <h5>Are you a ...</h5>
