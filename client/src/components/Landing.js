@@ -60,7 +60,7 @@ class Landing extends Component {
 
 	render() {
 		const user = this.props.USER
-		console.log(user)
+		// console.log(user)
 		return (
 			<div>
 				<div>

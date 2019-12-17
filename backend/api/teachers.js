@@ -64,7 +64,7 @@ router.delete('/suggested_links/remove', (req, res, next) => {
     res.status(200).send("Request successful")
   } catch (error) {
     res.status(500).send('No associated link with that course');
-    console.log("Could not delete suggested_link with id # " + req.body.course_id)
+    // console.log("Could not delete suggested_link with id # " + req.body.course_id)
   }
 })
 
@@ -111,6 +111,6 @@ router.delete('/delete_course_textbook', (req, res, next) => {
     res.status(200).send("Request successful")
   } catch (error) {
     res.status(500).send('No associated textbook with that course');
-    console.log("Could not delete course_textbook with id # " + req.params.id)
+    // console.log("Could not delete course_textbook with id # " + req.params.id)
   }
 })

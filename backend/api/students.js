@@ -11,7 +11,7 @@ router.get('/:id', async (req, res, next) => {
   try 
   {
     var Query = "SELECT C.course_id, C.course_title, C.course_professor, T.textbook_id, T.title, T.edition, T.authors, T.amazon_url, T.pdf_url FROM courses as C, user_courses as UC, textbooks as T, course_textbooks as CT WHERE UC.username = \'" + req.params.id + "\' AND C.course_id = UC.course_id AND C.course_id = CT.course_id AND CT.textbook_id = T.textbook_id;"
-    console.log(Query)
+    // console.log(Query)
     const user = await db.query(Query, {
         // replacements: {id: req.params.id},
         type: db.QueryTypes.SELECT
@@ -44,11 +44,11 @@ router.post('/add_link', async (req, res, next) => {
 */
 router.post('/add_course', async (req, res, next) => {
   try {
-    console.log('/add_course api:')
-    console.log(req.body)
+    // console.log('/add_course api:')
+    // console.log(req.body)
     const user_course = await User_Courses.create(req.body)
     res.status(200).send("Request successful")
-    console.log("Added course")
+    // console.log("Added course")
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('Course already exists for that user')
@@ -60,8 +60,8 @@ router.post('/add_course', async (req, res, next) => {
 
 /* Delete user_course entry */
 router.delete('/remove_course/', async (req, res, next) => {
-  console.log('hit /remove_course')
-  console.log(req.body)
+  // console.log('hit /remove_course')
+  // console.log(req.body)
   try {
     User_Courses.destroy({
       where: {
@@ -72,7 +72,7 @@ router.delete('/remove_course/', async (req, res, next) => {
     res.status(200).send("Request successful")
   } catch (error) {
     res.status(500).send('No associated user with that course');
-    console.log("Could not delete user with id # " + req.body.user_id)
+    // console.log("Could not delete user with id # " + req.body.user_id)
   }
 })
 

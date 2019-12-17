@@ -6,7 +6,7 @@ import { getUserCourses, addUserCourses } from '../store'
 import { deleteUserCourses } from '../store/students'
 import Table from 'react-bootstrap/Table'
 import axios from 'axios'
-
+import './table.css'
 
 class StudentHome extends Component {
     constructor(props) {
@@ -54,12 +54,17 @@ class StudentHome extends Component {
     }
 
     async handleSuggest() {
-        await axios.post('http://localhost:3000/api/students/add_link', {
+        const res = await axios.post('http://localhost:3000/api/students/add_link', {
             course_id: this.state.course_id,
             username: this.props.courses.username,
             pdf_url: this.state.pdf_url
         })
-
+        if(res.status != 200) {
+            alert('Error: Please try again')
+        }
+        else if (res.status == 200) {
+            alert('Successfully suggested link')
+        }
         this.toggleLinkPopUp()
     }
 
@@ -70,7 +75,7 @@ class StudentHome extends Component {
 
     async handleDelete() {
         this.props.deleteCourses(this.props.courses.username, this.state.course_id)
-        this.toggleDeletePopUp()
+        // this.toggleDeletePopUp()
     }
 
     componentWillMount() {
@@ -82,20 +87,10 @@ class StudentHome extends Component {
 
     }
 
-    // componentDidMount() {
-    //     // Check that user is indeed a student
-    //     
-    //     if (!this.props.loginStatus || this.props.user.type != 0) {
-    //         // go back to login 
-    //         // TODO reroute to prof, admin pages
-    //         history.push('/')
-    //     }
-    // }
-
-
     render() {
         const courseList = this.props.courses.data
         return (
+            
             <div>
                  <button onClick={() => {
                     logout()
@@ -110,9 +105,10 @@ class StudentHome extends Component {
                     <div>
                         {courseList ?
                             (
-                                <Table>
+                                <Table id="table">
                                     <thead>
                                         <tr>
+                                            <th>Action</th>
                                             <th>Course ID</th>
                                             <th>Title</th>
                                             <th>Professor</th>
@@ -128,6 +124,10 @@ class StudentHome extends Component {
                                         {
                                             Object.keys(courseList).map(course => (
                                                 <tr>
+                                                    <td><button onClick={() => {
+                                                        this.props.deleteCourses(this.props.courses.username, courseList[course].course_id)
+                                                        alert(`${courseList[course].course_title} successfully deleted.`)
+                                                    }}>Delete</button></td>
                                                     <td>{courseList[course].course_id}</td>
                                                     <td>{courseList[course].course_title}</td>
                                                     <td>{courseList[course].course_professor}</td>
@@ -162,7 +162,10 @@ class StudentHome extends Component {
                                     <input type="text" name="course_id" onChange={this.handleChange} />
                                 </div>
                             </form>
-                            <button onClick={this.handleSubmit}>
+                            <button onClick={() => {
+                                this.handleSubmit()
+                                alert('Course Added')
+                                }}>
                                 Add Course to Home
                             </button>
 
@@ -172,7 +175,7 @@ class StudentHome extends Component {
                     }
                 </div>
                 <div>
-                    {!this.state.deletePopUp ? <button onClick={this.toggleDeletePopUp}>Delete Course</button> : <button onClick={this.toggleDeletePopUp}>Close</button>}
+                    {/* {!this.state.deletePopUp ? <button onClick={this.toggleDeletePopUp}>Delete Course</button> : <button onClick={this.toggleDeletePopUp}>Close</button>}
                 </div>
                 <div>
                     {this.state.deletePopUp ?
@@ -189,7 +192,7 @@ class StudentHome extends Component {
                         </div>
                         :
                         null
-                    }
+                    } */}
                 </div>
                 <div>
                     {courseList ?

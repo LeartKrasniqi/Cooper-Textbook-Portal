@@ -38,7 +38,7 @@ class AdminHome extends Component {
         event.preventDefault()
         this.setState({
             [event.target.name]: event.target.value
-        }, console.log(this.state))
+        },)
     }
 
     async addCourse() {
@@ -59,7 +59,6 @@ class AdminHome extends Component {
     render() {
 
         const professorList = this.props.me.admin
-        console.log(professorList)
         
         return (
             <div>
@@ -84,7 +83,7 @@ class AdminHome extends Component {
                         <tbody>
                         {Object.keys(professorList).map(prof => (
                             <tr>
-                                {console.log(prof)}
+                                {/* {console.log(prof)} */}
                                 <td>{professorList[prof].username}</td>
                                 <td><button onClick={async () => {
                                     this.props.approve(professorList[prof].username)

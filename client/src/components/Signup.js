@@ -13,6 +13,7 @@ class Signup extends Component {
         this.handleRadio = this.handleRadio.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.togglePassword = this.togglePassword.bind(this)
     }
     handleRadio(event) {
         event.preventDefault()
@@ -23,14 +24,14 @@ class Signup extends Component {
         }
         this.setState({
             type: Number(event.target.value)
-        }, console.log(this.state))
+        })
     }
 
     handleChange(event) {
         event.preventDefault()
         this.setState({
             [event.target.name]: event.target.value
-        }, console.log(this.state))
+        })
     }
 
     handleSubmit(event) {
@@ -39,6 +40,16 @@ class Signup extends Component {
         this.props.history.push('/')
     }
 
+    togglePassword() {
+            var x = document.getElementById("pw");
+            if (x.type === "password") {
+              x.type = "text";
+            } else {
+              x.type = "password";
+            }
+    }
+    
+ 
     render() {
         return (
             <div>
@@ -48,7 +59,9 @@ class Signup extends Component {
                         <input type="text" name="email" placeholder="Enter Username" onChange={this.handleChange} />
                     </div>
                     <div>
-                        <input type="text" name="password" placeholder="Enter Password" onChange={this.handleChange}/>
+                        <input type="password" name="password" id="pw" placeholder="Enter Password" onChange={this.handleChange}/>
+                        <input type="checkbox" onClick={this.togglePassword} />
+                        Show Password
                     </div>
                     <div>
                         <h5>Are you a ...</h5>
@@ -58,9 +71,9 @@ class Signup extends Component {
                         <label> Professor
                             <input type="radio" value="1" checked={this.state.type == 1} onChange={this.handleRadio}/>
                         </label>
-                        <label> Admin
+                        {/* <label> Admin
                                 <input type="radio" value="2" checked={this.state.type == 2} onChange={this.handleRadio}/>
-                        </label>
+                        </label> */}
                     </div>
                     <button onClick={this.handleSubmit}>Sign Up</button>
                 </form>

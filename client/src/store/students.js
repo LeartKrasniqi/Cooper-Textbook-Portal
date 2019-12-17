@@ -50,7 +50,7 @@ export const getUserCourses = (username) => async dispatch => {
 export const addUserCourses = (username, course_id) => async dispatch => {
     let ret
     try {
-        console.log('add user redux hit')
+        // console.log('add user redux hit')
         await axios.post('http://localhost:3000/api/students/add_course', {
             username,
             course_id
@@ -63,9 +63,9 @@ export const addUserCourses = (username, course_id) => async dispatch => {
 }
 
 export const deleteUserCourses = (username, course_id) => async dispatch => {
-    console.log('store hit')
-    console.log(username)
-    console.log(course_id)
+    // console.log('store hit')
+    // console.log(username)
+    // console.log(course_id)
     let ret
     try {
         await axios.delete(`http://localhost:3000/api/students/remove_course`, {data: {
