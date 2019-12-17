@@ -21,6 +21,7 @@ class Routes extends Component{
 					<Route exact path='/signup' component={Signup} />
 					<Route exact path='/students' component={StudentHome}/>
 					<Route exact path='/admin' component={AdminHome} />
+          <Route exact path='/teachers' component={TeacherHome}/>
 				</Switch>
 			</Router>
 		)

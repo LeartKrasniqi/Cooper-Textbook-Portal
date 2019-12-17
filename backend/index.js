@@ -27,18 +27,18 @@ passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-// passport.deserializeUser(function(user, done) {
-//   done(null, user);
-// });
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await db.models.findByPk(id)
-    done(null, user)
-  } catch (error) {
-    done(error)
-  }
-})
+// passport.deserializeUser(async (id, done) => {
+//   try {
+//     const user = await db.models.findByPk(id)
+//     done(null, user)
+//   } catch (error) {
+//     done(error)
+//   }
+// })
 
 const createApp = () => {
   // logging middleware
