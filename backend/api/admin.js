@@ -21,12 +21,12 @@ router.get('/pending_profs', async (req, res, next) => {
 })
 
 /* Approve professor (Change the is_approved to true) */
-router.put("/approve_prof/:id", async (req, res, next) => {
+router.put("/approve_prof/:username", async (req, res, next) => {
   try {
     const edit = req.body
     const update = await Users.update(edit, {
       where: {
-        id: req.params.id
+        username: req.params.username
       }
     })
     res.json(update)
@@ -34,6 +34,8 @@ router.put("/approve_prof/:id", async (req, res, next) => {
     next(error)
   }
 })
+
+
 
 /* Remove a course (and all of its associated data) */
 router.delete('/delete/:id', async (req, res, next) => {
