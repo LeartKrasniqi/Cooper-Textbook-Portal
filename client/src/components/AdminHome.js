@@ -3,7 +3,9 @@ import Table from 'react-bootstrap/Table'
 import { me } from '../store'
 import { connect } from 'react-redux'
 import {getPendingProfs, removePendingProf} from '../store/admin'
+import {logout} from '../store/user'
 import axios from 'axios'
+import history from '../history'
 
 class AdminHome extends Component {
     constructor(props) {
@@ -61,6 +63,11 @@ class AdminHome extends Component {
         
         return (
             <div>
+                 <button onClick={() => {
+                    logout()
+                    alert('Logged out successfuly')
+                    history.push('/')
+                }}>Log Out</button>
                 <h3>ADMIN PAGE</h3>
                     <div>
                         <h4>Pending Professors</h4>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { me } from '../store'
 import { connect } from 'react-redux'
-//import { getUserCourses } from '../store'
+// import { getUserCourses } from '../store'
+import {logout} from '../store/user'
 import { getTeacherCoursesAndLinks, getTeacherCourses, addTeacherTextbook, deleteTeacherTextbook, editTeacherTextbook, getTeacherPendingLinks, removeTeacherPendingLinks } from '../store/teachers'
 import Table from 'react-bootstrap/Table'
 //import { Table } from 'antd'
@@ -115,6 +116,11 @@ class TeacherHome extends Component {
         // const linkList = this.props.
         return (
             <div>
+                <button onClick={() => {
+                    logout()
+                    alert('Logged out successfuly')
+                    history.push('/')
+                }}>Log Out</button>
                 <div>
                     <h2>Cooper Union Textbook Portal</h2>
                     {/* <h4>Welcome {this.props.user.username}</h4> */}

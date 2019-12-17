@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { me } from '../store'
+import { me, logout } from '../store'
 import { connect } from 'react-redux'
+import history from '../history'
 import { getUserCourses, addUserCourses } from '../store'
 import { deleteUserCourses } from '../store/students'
 import Table from 'react-bootstrap/Table'
@@ -96,6 +97,11 @@ class StudentHome extends Component {
         const courseList = this.props.courses.data
         return (
             <div>
+                 <button onClick={() => {
+                    logout()
+                    alert('Logged out successfuly')
+                    history.push('/')
+                }}>Log Out</button>
                 <div>
                     <h2>Cooper Union Textbook Portal</h2>
                 </div>
@@ -200,7 +206,7 @@ class StudentHome extends Component {
                                         <input type="text" name="pdf_url" onChange={this.handleChange}/>
                                     </div>
                                 </form>
-                                <button onClick={this.handleSuggest} >Suggest Link</button>
+                                <button onClick={this.handleSuggest}>Suggest Link</button>
                             </div>
                         </div>}
                         </div>
